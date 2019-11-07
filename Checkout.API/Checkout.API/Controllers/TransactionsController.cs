@@ -1,4 +1,6 @@
 ﻿using System;
+using Checkout.API.Models.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Checkout.API.Controllers
@@ -7,20 +9,17 @@ namespace Checkout.API.Controllers
     [Route("[controller]")] 
     public class TransactionsController : ControllerBase
     {
-        //TODO implement method to process a transaction
-        public TransactionsController()
-        //[HttpPost]
-        //public IEnumerable<WeatherForecast> PostTransaction()
-        //{
-        //    var rng = new Random();
-        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //    {
-        //        Date = DateTime.Now.AddDays(index),
-        //        TemperatureC = rng.Next(-20, 55),
-        //        Summary = Summaries[rng.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
+
+        #region Properties
+
+        #endregion  
+
+        //TODO Process a transaction
+        [HttpPost]
+        public IActionResult CreateTransaction()
+        {
+            return Ok();
+        }
 
         //TODO implement method to get all transactions for a merchant
 
