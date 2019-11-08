@@ -1,4 +1,7 @@
 ﻿using System;
+using Checkout.API.Services;
+using Checkout.Data.Repository;
+using Checkout.Data.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
@@ -24,8 +27,9 @@ namespace Checkout.API.Extensions
                 });
             });
 
-            //services.AddScoped<EFRepository>();
-            //services.AddScoped<RepositoryService>();
+            services.AddScoped<EFRepository>();
+            services.AddScoped<RepositoryService>();
+            services.AddScoped<Checkout.API.Services.CurrencyService>();
 
             return services;
         }

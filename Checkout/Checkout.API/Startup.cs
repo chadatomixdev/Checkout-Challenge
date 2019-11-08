@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
 using Checkout.API.Extensions;
+using Checkout.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,9 +39,8 @@ namespace Checkout.API
             services.AddSystemServices();
 
             //TODO Change this to use Azure Key Store. Temporary and must not be commited. 
-            //services.AddDbContext<CheckoutDBContext>(options =>
-            // options.UseSqlServer(Configuration.GetConnectionString("Ommited for security")));
-
+            services.AddDbContext<CheckoutDBContext>(options =>
+             options.UseSqlServer(Configuration.GetConnectionString("Server=checkoutchallenge.database.windows.net;Database=checkoutchallengedb;User Id=chadbonthuys@checkoutchallenge.database.windows.net;Password=a63*WF5A761g;MultipleActiveResultSets=true;")));
         }
 
         /// <summary>

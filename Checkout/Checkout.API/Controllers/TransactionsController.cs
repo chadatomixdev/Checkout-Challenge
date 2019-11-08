@@ -1,5 +1,6 @@
 ﻿using System;
 using Checkout.API.Representers;
+using Checkout.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,17 @@ namespace Checkout.API.Controllers
     public class TransactionsController : ControllerBase
     {
         #region Properties
+
+        private readonly CurrencyService _currencyService;
+
+        #endregion
+
+
+        #region Constructor
+        public TransactionsController(CurrencyService currencyService)
+        {
+            _currencyService = currencyService;
+        }
 
         #endregion
 
@@ -31,6 +43,9 @@ namespace Checkout.API.Controllers
             bool isValid = Guid.TryParse(transaction.MerchantID, out Guid guidOutput);
             if (!isValid)
                 return BadRequest("Merchant is invalid");
+
+            if (_currencyService.GetCurrency(transaction.Currency) is null)
+                return BadRequest("Currency not supported");
 
 
 
