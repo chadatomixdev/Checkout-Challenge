@@ -1,5 +1,6 @@
 ﻿using Checkout.Data.Model;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Checkout.Data
 {
@@ -25,6 +26,8 @@ namespace Checkout.Data
             base.OnModelCreating(builder);
 
             builder.Entity<Currency>().ToTable("Currency");
+            builder.Entity<Merchant>().ToTable("Merchant");
+
 
             #region Seed Data
 
@@ -32,6 +35,12 @@ namespace Checkout.Data
                     new Currency { CurrencyId = 1, Name = "ZAR" },
                     new Currency { CurrencyId = 2, Name = "USD" },
                     new Currency { CurrencyId = 3, Name = "GBP" }
+                );
+
+            builder.Entity<Merchant>().HasData(
+                    new Merchant { MerchantID = Guid.NewGuid(), Name = "Test Merchant 1", Active = true, Description = "Testing Description 1"},
+                    new Merchant { MerchantID = Guid.NewGuid(), Name = "Test Merchant 2", Active = true, Description = "Testing Description 2" },
+                    new Merchant { MerchantID = Guid.NewGuid(), Name = "Test Merchant 3", Active = true, Description = "Testing Description 3" }
                 );
 
             #endregion

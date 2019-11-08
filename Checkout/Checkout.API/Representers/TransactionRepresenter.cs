@@ -10,8 +10,7 @@ namespace Checkout.API.Representers
     {
         public string Currency { get; set; }
         public decimal Amount { get; set; }
-
         public CardDetails Card { get;set; }
-
+        public string MerchantID { get; set; }
     }
 }

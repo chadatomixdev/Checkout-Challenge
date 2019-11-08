@@ -7,5 +7,8 @@ namespace Checkout.API.Models
 {
     public enum TransactionStatus
     {
+        Cancelled,
+        Successfull,
+        Failed
     }
 }

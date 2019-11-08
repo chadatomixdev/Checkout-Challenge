@@ -28,19 +28,25 @@ namespace Checkout.API.Controllers
             if (transaction.Amount <= 0)
                 return BadRequest("Amount is invalid");
 
+            bool isValid = Guid.TryParse(transaction.MerchantID, out Guid guidOutput);
+            if (!isValid)
+                return BadRequest("Merchant is invalid");
+
+
+
 
             //fget currency from db and return bad request if not found
-            
 
 
-            
-            
+
+
+
             //TODO CC Validation 
 
 
             //POST to mock bank 
             //Update transaction status 
-            
+
 
 
             return Ok();
