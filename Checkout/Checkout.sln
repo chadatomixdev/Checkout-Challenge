@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.API", "Checkout.API\Checkout.API.csproj", "{C708FD5C-7A71-4B82-A06D-F21303047BAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Tests", "Checkout.Tests\Checkout.Tests.csproj", "{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C708FD5C-7A71-4B82-A06D-F21303047BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C708FD5C-7A71-4B82-A06D-F21303047BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C708FD5C-7A71-4B82-A06D-F21303047BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C708FD5C-7A71-4B82-A06D-F21303047BAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
