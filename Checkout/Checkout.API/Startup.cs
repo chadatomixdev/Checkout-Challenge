@@ -35,6 +35,11 @@ namespace Checkout.API
         {
             services.AddControllers();
             services.AddSystemServices();
+
+            //TODO Change this to use Azure Key Store. Temporary and must not be commited. 
+            //services.AddDbContext<CheckoutDBContext>(options =>
+            // options.UseSqlServer(Configuration.GetConnectionString("Ommited for security")));
+
         }
 
         /// <summary>

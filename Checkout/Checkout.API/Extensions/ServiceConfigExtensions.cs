@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
@@ -23,6 +24,9 @@ namespace Checkout.API.Extensions
                     },
                 });
             });
+
+            //services.AddScoped<EFRepository>();
+            //services.AddScoped<RepositoryService>();
 
             return services;
         }

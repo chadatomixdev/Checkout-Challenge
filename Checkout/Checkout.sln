@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Data", "Checkout.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.MockBank", "Checkout.MockBank\Checkout.MockBank.csproj", "{05BC878E-2FF4-480F-80F9-A1062181BECD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.EFMigrations", "Checkout.EFMigrations\Checkout.EFMigrations.csproj", "{ECE96245-C83D-4A35-B086-996F3358D714}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{05BC878E-2FF4-480F-80F9-A1062181BECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05BC878E-2FF4-480F-80F9-A1062181BECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05BC878E-2FF4-480F-80F9-A1062181BECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECE96245-C83D-4A35-B086-996F3358D714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECE96245-C83D-4A35-B086-996F3358D714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECE96245-C83D-4A35-B086-996F3358D714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECE96245-C83D-4A35-B086-996F3358D714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

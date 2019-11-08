@@ -9,17 +9,27 @@ namespace Checkout.API.Controllers
     [Route("[controller]")] 
     public class TransactionsController : ControllerBase
     {
-
         #region Properties
 
-        #endregion  
+        #endregion
 
-        //TODO Process a transaction
+        /// <summary>
+        /// Post a transaction
+        /// </summary>
+        /// <returns></returns>
+        //[Authorize]
         [HttpPost]
-        public IActionResult CreateTransaction()
+        [Route("transactions", Name = "PostTransaction")]
+        public IActionResult PostTransaction()
         {
+        
+            
+            
             return Ok();
         }
+
+
+
 
         //TODO implement method to get all transactions for a merchant
 
