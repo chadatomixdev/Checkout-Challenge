@@ -10,7 +10,6 @@ namespace Checkout.Data.Services
     {
         private const bool SAVE = true;
         private readonly EFRepository repository;
-
         public RepositoryService(EFRepository repository)
         {
             this.repository = repository;
@@ -61,7 +60,10 @@ namespace Checkout.Data.Services
 
         public bool Delete<TEntity>(TEntity item, bool AutoSave = SAVE) where TEntity : class
         {
-            bool result = repository.Delete(item);
+            var result = false;
+
+            result = repository.Delete(item);
+
             if (AutoSave)
             {
                 SaveChanges();
@@ -71,7 +73,10 @@ namespace Checkout.Data.Services
 
         public bool Delete<TEntity>(IEnumerable<TEntity> items, bool AutoSave = SAVE) where TEntity : class
         {
-            bool result = repository.Delete(items);
+            var result = false;
+
+            result = repository.Delete(items);
+
             if (AutoSave)
             {
                 SaveChanges();
@@ -138,6 +143,7 @@ namespace Checkout.Data.Services
             return repository
                 .Find(predicate);
         }
+
         public IQueryable<TEntity> Find<TEntity, TKey>(Expression<Func<TEntity, bool>> predicate, int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> orderBy) where TEntity : class
         {
             return repository

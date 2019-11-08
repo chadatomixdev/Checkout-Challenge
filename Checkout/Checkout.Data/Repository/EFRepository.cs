@@ -8,24 +8,16 @@ namespace Checkout.Data.Repository
 {
     public class EFRepository
     {
-        #region Properties
-
         public CheckoutDBContext Context { get; }
 
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Repository Constructor
+        /// Constructor
         /// </summary>
         /// <param name="context"></param>
+        /// 
         public EFRepository(CheckoutDBContext context)
         {
             Context = context ?? throw new ArgumentNullException(nameof(context));
         }
-
-        #endregion
 
         #region Add
 
