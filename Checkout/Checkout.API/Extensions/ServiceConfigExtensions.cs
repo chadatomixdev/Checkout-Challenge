@@ -11,7 +11,17 @@ namespace Checkout.API.Extensions
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Checkout API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {
+                    Title = "Checkout API", 
+                    Version = "v1",
+                    Description = "ASP.Net Core 3 API for the Checkout challenge",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Chad Bonthuys",
+                        Email = "chad@atomixdev.com",
+                        Url = new Uri("https://www.linkedin.com/in/chadbonthuys/"),
+                    },
+                });
             });
 
             return services;
