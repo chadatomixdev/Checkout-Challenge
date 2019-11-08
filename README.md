@@ -5,4 +5,6 @@ Interview assignment .NET challenge 2.0 for checkout.com - Building a Payment Ga
 
 API Documentation - Swagger 
 
-Checkout.API - Payment Gateway API 
+Checkout.API - Payment Gateway API https://checkoutchallengeapi.azurewebsites.net/index.html
+
+Azure DB - checkoutchallenge.database.windows.net
