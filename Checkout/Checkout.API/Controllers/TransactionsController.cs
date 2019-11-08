@@ -1,5 +1,5 @@
 ﻿using System;
-using Checkout.API.Models.Request;
+using Checkout.API.Representers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,11 +20,29 @@ namespace Checkout.API.Controllers
         //[Authorize]
         [HttpPost]
         [Route("transactions", Name = "PostTransaction")]
-        public IActionResult PostTransaction()
+        public IActionResult PostTransaction(TransactionRepresenter transaction)
         {
-        
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (transaction.Amount <= 0)
+                return BadRequest("Amount is invalid");
+
+
+            //fget currency from db and return bad request if not found
+            
+
+
             
             
+            //TODO CC Validation 
+
+
+            //POST to mock bank 
+            //Update transaction status 
+            
+
+
             return Ok();
         }
 
