@@ -1,9 +1,12 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.API", "Checkout.API\Checkout.API.csproj", "{C708FD5C-7A71-4B82-A06D-F21303047BAF}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.API", "Checkout.API\Checkout.API.csproj", "{C708FD5C-7A71-4B82-A06D-F21303047BAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Tests", "Checkout.Tests\Checkout.Tests.csproj", "{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Tests", "Checkout.Tests\Checkout.Tests.csproj", "{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Data", "Checkout.Data\Checkout.Data.csproj", "{6670F686-751A-48E4-973B-0747C21C2AA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,5 +22,15 @@ Global
 		{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE15F943-4EBB-4CBC-95D6-E811E774F4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6670F686-751A-48E4-973B-0747C21C2AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6670F686-751A-48E4-973B-0747C21C2AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6670F686-751A-48E4-973B-0747C21C2AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6670F686-751A-48E4-973B-0747C21C2AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EBAE7448-89B1-4E63-ADEF-04C5AAC3772D}
 	EndGlobalSection
 EndGlobal
