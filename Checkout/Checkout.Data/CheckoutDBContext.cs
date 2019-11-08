@@ -1,8 +1,5 @@
 ﻿using Checkout.Data.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Checkout.Data
 {
@@ -13,14 +10,13 @@ namespace Checkout.Data
     {
         public CheckoutDBContext(DbContextOptions options) : base(options)
         {
+            //Create the DB if it does not exist and apply pending migrations
             Database.Migrate();
         }
 
         #region DBSets 
 
-        //public virtual DbSet<BudgetPeriods> BudgetPeriods { get; set; }
-        //public virtual DbSet<CardDetails> CardDetails { get; set; }
-        //public virtual DbSet<Merchant> Merchant { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
 
         #endregion
 
@@ -28,19 +24,17 @@ namespace Checkout.Data
         {
             base.OnModelCreating(builder);
 
-            //builder.Entity<Merchant>(entity =>
-            //{
+            builder.Entity<Currency>().ToTable("Currency");
 
-            //});
+            #region Seed Data
 
-            builder.Entity<Test>().ToTable("Test");
+            builder.Entity<Currency>().HasData(
+                    new Currency { CurrencyId = 1, Name = "ZAR" },
+                    new Currency { CurrencyId = 2, Name = "USD" },
+                    new Currency { CurrencyId = 3, Name = "GBP" }
+                );
 
+            #endregion
         }
-
-        #region Seed Data
-
-
-
-        #endregion
     }
 }

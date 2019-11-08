@@ -18,15 +18,34 @@ namespace Checkout.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Checkout.Data.Model.Test", b =>
+            modelBuilder.Entity("Checkout.Data.Model.Currency", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CurrencyId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                    b.Property<string>("Name");
 
-                    b.ToTable("Test");
+                    b.HasKey("CurrencyId");
+
+                    b.ToTable("Currency");
+
+                    b.HasData(
+                        new
+                        {
+                            CurrencyId = 1,
+                            Name = "ZAR"
+                        },
+                        new
+                        {
+                            CurrencyId = 2,
+                            Name = "USD"
+                        },
+                        new
+                        {
+                            CurrencyId = 3,
+                            Name = "GBP"
+                        });
                 });
 #pragma warning restore 612, 618
         }

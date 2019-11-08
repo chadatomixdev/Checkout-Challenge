@@ -10,10 +10,10 @@ namespace Checkout.Data.Repository
     {
         public CheckoutDBContext Context { get; }
 
-        /// Constructor
+        /// <summary>
+        /// EF repository pattern constructor
         /// </summary>
-        /// <param name="context"></param>
-        /// 
+        /// <param name="DB Context"></param>
         public EFRepository(CheckoutDBContext context)
         {
             Context = context ?? throw new ArgumentNullException(nameof(context));
