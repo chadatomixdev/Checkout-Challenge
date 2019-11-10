@@ -27,7 +27,7 @@ namespace Checkout.API.Controllers
 
         /// <summary>
         /// Post a transaction
-        /// </summary>
+        /// </summary>======
         /// <returns></returns>
         //[Authorize]
         [HttpPost]
