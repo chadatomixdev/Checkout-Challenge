@@ -30,6 +30,7 @@ namespace Checkout.API.Extensions
             services.AddScoped<EFRepository>();
             services.AddScoped<RepositoryService>();
             services.AddScoped<Checkout.API.Services.CurrencyService>();
+            services.AddScoped<CardDetailsService>();
 
             return services;
         }

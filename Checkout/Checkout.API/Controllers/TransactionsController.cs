@@ -28,9 +28,9 @@ namespace Checkout.API.Controllers
 
         /// <summary>
         /// Process a transaction
-        /// </summary>======
+        /// </summary>
+        /// <param name="transaction"></param>
         /// <returns></returns>
-        //[Authorize]
         [HttpPost]
         [Route("process")]
         public async Task<IActionResult> ProcessTransaction(TransactionRepresenter transaction)
@@ -48,12 +48,11 @@ namespace Checkout.API.Controllers
             if (_currencyService.GetCurrency(transaction.Currency) is null)
                 return BadRequest("Currency not supported");
 
+            CreditCardHelper.SaveCardDetails(transaction.Card);
 
             //TODO CC Validation 
 
             //TODO add to DB
-
-            //tODO Save Card Details
 
             //Process transaction through mock acquirer
             var bankResponse = await APIHelper.ProcessTransactionAsync(transaction);

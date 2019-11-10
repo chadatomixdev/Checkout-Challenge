@@ -9,9 +9,7 @@ namespace Checkout.API.Helpers
     public static class WebRequestHelper
     {
         //public static string BaseUrl => "https://checkoutmockbank.azurewebsites.net/";
-
         public static string BaseUrl => "http://localhost:50214/";
-
 
         public static async Task<HttpResponseMessage> MakeAsyncRequest(string url, Dictionary<string, string> content)
         {
@@ -24,9 +22,7 @@ namespace Checkout.API.Helpers
             httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type: application/json", "application /json");
 
             if (content == null)
-            {
                 content = new Dictionary<string, string>();
-            }
 
             var encodedContent = new FormUrlEncodedContent(content);
 

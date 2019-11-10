@@ -8,7 +8,6 @@ namespace Checkout.API.Helpers
 {
     public static class APIHelper
     {
-
         public static async Task<bool> ProcessTransactionAsync(TransactionRepresenter transaction)
         {
             var url = WebRequestHelper.BaseUrl + "Transactions/transactions";

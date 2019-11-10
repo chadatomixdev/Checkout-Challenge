@@ -16,11 +16,20 @@ namespace Checkout.API.Services
             _contextService = contextService;
         }
 
+        /// <summary>
+        /// Return all currencies from the DB
+        /// </summary>
+        /// <returns></returns>
         public List<Currency> GetAllCurrencies()
         {
             return _contextService.Find<Currency>(x => x.CurrencyId != 0).ToList();
         }
 
+        /// <summary>
+        /// Return currency by name
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
         public Currency GetCurrency(string currency)
         {
             return _contextService.Find<Currency>(c => c.Name == currency).FirstOrDefault();
