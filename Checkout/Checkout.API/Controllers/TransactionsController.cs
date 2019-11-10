@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Checkout.API.Helpers;
 using Checkout.API.Representers;
 using Checkout.API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -25,13 +27,13 @@ namespace Checkout.API.Controllers
         #endregion
 
         /// <summary>
-        /// Post a transaction
+        /// Process a transaction
         /// </summary>======
         /// <returns></returns>
         //[Authorize]
         [HttpPost]
-        [Route("transactions", Name = "PostTransaction")]
-        public IActionResult PostTransaction(TransactionRepresenter transaction)
+        [Route("process")]
+        public async Task<IActionResult> ProcessTransaction(TransactionRepresenter transaction)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -47,19 +49,17 @@ namespace Checkout.API.Controllers
                 return BadRequest("Currency not supported");
 
 
-
-
             //TODO CC Validation 
 
 
             //POST to mock bank 
             //Update transaction status 
 
+            var processed = await APIHelper.ProcessTransactionAsync();
 
 
             return Ok();
         }
-
 
 
 

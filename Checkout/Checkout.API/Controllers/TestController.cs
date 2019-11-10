@@ -21,11 +21,11 @@ namespace Checkout.API.Controllers
             _configuration = configuration;
         }
         /// <summary>
-        /// This returns version information
+        /// This returns version information as a base test API
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("test/versions")]
+        [Route("test/version")]
         public IActionResult Test()
         {
             // Version
