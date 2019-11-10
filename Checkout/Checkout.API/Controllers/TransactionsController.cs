@@ -55,7 +55,10 @@ namespace Checkout.API.Controllers
             //POST to mock bank 
             //Update transaction status 
 
-            var processed = await APIHelper.ProcessTransactionAsync();
+            //TODO Create transaction in DB 
+
+            //Process transaction through mock acquirer
+            var processed = await APIHelper.ProcessTransactionAsync(transaction);
 
 
             return Ok();

@@ -8,7 +8,10 @@ namespace Checkout.API.Helpers
 {
     public static class WebRequestHelper
     {
-        public static string BaseUrl => "https://checkoutmockbank.azurewebsites.net/";
+        //public static string BaseUrl => "https://checkoutmockbank.azurewebsites.net/";
+
+        public static string BaseUrl => "http://localhost:50214/";
+
 
         public static async Task<HttpResponseMessage> MakeAsyncRequest(string url, Dictionary<string, string> content)
         {
@@ -18,7 +21,7 @@ namespace Checkout.API.Helpers
                 BaseAddress = new Uri(url)
             };
 
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type: application/x-www-form-urlencoded", "application/json");
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type: application/json", "application /json");
 
             if (content == null)
             {

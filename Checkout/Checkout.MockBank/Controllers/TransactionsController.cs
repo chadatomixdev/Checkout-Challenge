@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Checkout.MockBank.Moodels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Checkout.MockBank.Controllers
 {
@@ -12,8 +13,11 @@ namespace Checkout.MockBank.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("transactions", Name = "ProcessTransaction")]
-        public IActionResult ProcessTransaction()
+        public IActionResult ProcessTransaction([FromForm]MockTransaction transaction)
         {
+
+
+
             return Ok();
         }
     }
