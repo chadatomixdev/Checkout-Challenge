@@ -15,13 +15,15 @@ namespace Checkout.API.Controllers
         #region Properties
 
         private readonly CurrencyService _currencyService;
+        private readonly CardDetailsService _cardDetailsService;
 
         #endregion
 
         #region Constructor
-        public TransactionsController(CurrencyService currencyService)
+        public TransactionsController(CurrencyService currencyService, CardDetailsService cardDetailsService)
         {
             _currencyService = currencyService;
+            _cardDetailsService = cardDetailsService;
         }
 
         #endregion
@@ -48,14 +50,31 @@ namespace Checkout.API.Controllers
             if (_currencyService.GetCurrency(transaction.Currency) is null)
                 return BadRequest("Currency not supported");
 
-            CreditCardHelper.SaveCardDetails(transaction.Card);
+            // CreditCardHelper.SaveCardDetails(transaction.Card);
 
-            //TODO CC Validation 
+            // Verify if the card exists and if it doesnt insert the card into the db
+            if (_cardDetailsService.GetCardDetails(transaction.Card.CardNumber) is null)
+            {
+                //TODO Add automapper to handle model mappings
+                var entity = new Data.Model.CardDetails
+                {
+                    CardNumber = transaction.Card.CardNumber,
+                    Cvv = transaction.Card.Cvv,
+                    ExpiryMonth = transaction.Card.ExpiryMonth,
+                    ExpiryYear = transaction.Card.ExpiryYear,
+                    HolderName = transaction.Card.HolderName
+                };
 
-            //TODO add to DB
+                _cardDetailsService.AddCard(entity);
+            }
 
-            //Process transaction through mock acquirer
-            var bankResponse = await APIHelper.ProcessTransactionAsync(transaction);
+
+                //TODO CC Validation 
+
+                //TODO add to DB
+
+                //Process transaction through mock acquirer
+                var bankResponse = await APIHelper.ProcessTransactionAsync(transaction);
 
             //Update transaction status 
 
