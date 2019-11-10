@@ -16,7 +16,7 @@ namespace Checkout.API
     {
         #region Properties
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration _configuration { get; }
 
         #endregion
 
@@ -24,7 +24,7 @@ namespace Checkout.API
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
         #endregion
@@ -38,9 +38,9 @@ namespace Checkout.API
             services.AddControllers();
             services.AddSystemServices();
 
-            //TODO Change this to use Azure Key Store. Temporary and must not be commited. 
+            //TODO Change this to use Azure Key Store. Temporary, must be changed
             services.AddDbContext<CheckoutDBContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("Server=checkoutchallenge.database.windows.net;Database=checkoutchallengedb;User Id=chadbonthuys@checkoutchallenge.database.windows.net;Password=a63*WF5A761g;MultipleActiveResultSets=true;")));
+             options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
         }
 
         /// <summary>

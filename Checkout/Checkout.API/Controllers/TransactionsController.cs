@@ -16,7 +16,6 @@ namespace Checkout.API.Controllers
 
         #endregion
 
-
         #region Constructor
         public TransactionsController(CurrencyService currencyService)
         {
@@ -46,12 +45,6 @@ namespace Checkout.API.Controllers
 
             if (_currencyService.GetCurrency(transaction.Currency) is null)
                 return BadRequest("Currency not supported");
-
-
-
-
-            //fget currency from db and return bad request if not found
-
 
 
 

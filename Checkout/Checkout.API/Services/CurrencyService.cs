@@ -13,7 +13,7 @@ namespace Checkout.API.Services
 
         public CurrencyService(RepositoryService contextService)
         {
-            contextService = _contextService;
+            _contextService = contextService;
         }
 
         public List<Currency> GetAllCurrencies()
@@ -23,15 +23,7 @@ namespace Checkout.API.Services
 
         public Currency GetCurrency(string currency)
         {
-
-
-
-            var currencies = _contextService.Find<Currency>(x => x.CurrencyId != 0).ToList();
-
-            return _contextService.Find<Currency>(c => c.Name == "ZAR").FirstOrDefault();
-
-
-            //return _contextService.Find<Currency>(c => c.Name == currency).FirstOrDefault();
+            return _contextService.Find<Currency>(c => c.Name == currency).FirstOrDefault();
         }
     }
 }
