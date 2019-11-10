@@ -18,6 +18,8 @@ namespace Checkout.Data
         #region DBSets 
 
         public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<Merchant> Merchants { get; set; }
+        public virtual DbSet<CardDetails> CardDetails { get; set; }
 
         #endregion
 
@@ -28,6 +30,9 @@ namespace Checkout.Data
             builder.Entity<Currency>().ToTable("Currency");
             builder.Entity<Merchant>().ToTable("Merchant");
 
+            builder.Entity<CardDetails>()
+            .Property(cd => cd.CardDetailsID)
+            .ValueGeneratedOnAdd();
 
             #region Seed Data
 

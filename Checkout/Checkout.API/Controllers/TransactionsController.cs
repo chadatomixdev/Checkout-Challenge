@@ -51,15 +51,14 @@ namespace Checkout.API.Controllers
 
             //TODO CC Validation 
 
+            //TODO add to DB
 
-            //POST to mock bank 
-            //Update transaction status 
-
-            //TODO Create transaction in DB 
+            //tODO Save Card Details
 
             //Process transaction through mock acquirer
-            var processed = await APIHelper.ProcessTransactionAsync(transaction);
+            var bankResponse = await APIHelper.ProcessTransactionAsync(transaction);
 
+            //Update transaction status 
 
             return Ok();
         }

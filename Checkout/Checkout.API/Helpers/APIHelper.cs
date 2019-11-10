@@ -25,6 +25,7 @@ namespace Checkout.API.Helpers
 
             var response = await WebRequestHelper.MakeAsyncRequest(url, content);
 
+
             if (response.IsSuccessStatusCode)
                 return true;
 
