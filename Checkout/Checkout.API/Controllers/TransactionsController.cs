@@ -68,10 +68,10 @@ namespace Checkout.API.Controllers
                 _cardDetailsService.AddCard(entity);
             }
 
+            var expiryConcatenated = $" {transaction.Card.ExpiryMonth}/{transaction.Card.ExpiryYear}";
+            CreditCardHelper.IsCreditCardInfoValid(transaction.Card.CardNumber, expiryConcatenated, transaction.Card.Cvv);
 
-                //TODO CC Validation 
-
-                //TODO add to DB
+                //TODO add transaction to DB with created status
 
                 //Process transaction through mock acquirer
                 var bankResponse = await APIHelper.ProcessTransactionAsync(transaction);
@@ -81,25 +81,17 @@ namespace Checkout.API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Get transactionb by ID for reconcilliation purposes
+        /// </summary>
+        /// <param name="merchantID"></param>
+        /// <param name="transactionID"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetTransactionById(Guid merchantID, Guid transactionID)
+        {
 
-
-        //TODO implement method to get all transactions for a merchant
-
-
-        //TODO implemennt method to get a specific transaction with details for a merchant
-
-        //[HttpGet]
-        //public IEnumerable<WeatherForecast> GetTransactionById()
-        //{
-        //    var rng = new Random();
-        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //    {
-        //        Date = DateTime.Now.AddDays(index),
-        //        TemperatureC = rng.Next(-20, 55),
-        //        Summary = Summaries[rng.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
-
+            return Ok();
+        }
     }
 }
