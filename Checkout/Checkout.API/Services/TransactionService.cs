@@ -24,5 +24,27 @@ namespace Checkout.API.Services
         {
             _contextService.Add(entity);
         }
+
+        /// <summary>
+        /// Get transaction by ID
+        /// </summary>
+        /// <param name="transactionID"></param>
+        /// <returns></returns>
+        public Transaction GetTransactionById(Guid transactionID)
+        {
+            return _contextService.Find<Transaction>(t => t.TransactionID == transactionID).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Get all transactions for merchant
+        /// </summary>
+        /// <param name="merchantID"></param>
+        /// <returns></returns>
+        public List<Transaction> GetTransactions(Guid merchantID)
+        {
+            var transaction = _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
+
+             return _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
+        }
     }
 }

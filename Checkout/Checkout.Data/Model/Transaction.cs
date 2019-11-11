@@ -7,6 +7,8 @@ namespace Checkout.Data.Model
     {
         [Key]
         public Guid TransactionID { get; set; }
+        
+        [DataType("decimal(18,5)")]
         public decimal Amount { get; set; }
 
         [MaxLength(20)]

@@ -10,4 +10,4 @@ Run the EF commands from Visual Studio package manger console or powershell. Not
 
 ##### Update Database
 
-`Add-Migration MigrationName`
+`Update-Database`

@@ -43,13 +43,15 @@ namespace Checkout.API.Controllers
         [Route("process")]
         public async Task<IActionResult> ProcessTransaction(TransactionRepresenter transactionRepresenter)
         {
+            #region Validation
+          
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             if (transactionRepresenter.Amount <= 0)
                 return BadRequest("Amount is invalid");
 
-            bool isValid = Guid.TryParse(transactionRepresenter.MerchantID, out Guid guidOutput);
+            bool isValid = Guid.TryParse(transactionRepresenter.MerchantID, out Guid merchantID);
             if (!isValid)
                 return BadRequest("Merchant is invalid");
 
@@ -64,6 +66,8 @@ namespace Checkout.API.Controllers
 
             if (currency is null)
                 return BadRequest("Currency not supported");
+
+            #endregion
 
             var cardEntity = new Data.Model.CardDetails();
             cardEntity = _cardDetailsService.GetCardDetails(transactionRepresenter.Card.CardNumber);
@@ -108,14 +112,31 @@ namespace Checkout.API.Controllers
         /// <summary>
         /// Get transactionb by ID for reconcilliation purposes
         /// </summary>
-        /// <param name="merchantID"></param>
         /// <param name="transactionID"></param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetTransactionById(Guid merchantID, Guid transactionID)
+        [Route("GetTransactionById")]
+        public IActionResult GetTransactionById(Guid transactionID)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            return Ok();
+            return Ok(_transactionService.GetTransactionById(transactionID));
+        }
+
+        /// <summary>
+        /// Get all transactions for merchant
+        /// </summary>
+        /// <param name="merchantID"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetTransactions")]
+        public IActionResult GetTransactions(Guid merchantID)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(_transactionService.GetTransactions(merchantID));
         }
     }
 }
