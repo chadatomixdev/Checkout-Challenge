@@ -4,14 +4,16 @@ using Checkout.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Checkout.Data.Migrations
 {
     [DbContext(typeof(CheckoutDBContext))]
-    partial class CheckoutDBContextModelSnapshot : ModelSnapshot
+    [Migration("20191111105350_TransactionMigration")]
+    partial class TransactionMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,7 @@ namespace Checkout.Data.Migrations
 
                     b.HasKey("CurrencyId");
 
-                    b.ToTable("Currencies");
+                    b.ToTable("Currency");
 
                     b.HasData(
                         new
@@ -83,74 +85,30 @@ namespace Checkout.Data.Migrations
 
                     b.HasKey("MerchantID");
 
-                    b.ToTable("Merchants");
+                    b.ToTable("Merchant");
 
                     b.HasData(
                         new
                         {
-                            MerchantID = new Guid("f16b33c1-055e-44c9-b574-ef329648a654"),
+                            MerchantID = new Guid("c6b8e52c-d8aa-48d6-b03e-07fdfb405255"),
                             Active = true,
                             Description = "Testing Description 1",
                             Name = "Test Merchant 1"
                         },
                         new
                         {
-                            MerchantID = new Guid("467e46fb-d389-4d6e-a689-fc41d4f3fc45"),
+                            MerchantID = new Guid("9d78f579-19a5-4792-961d-11d05df89e05"),
                             Active = true,
                             Description = "Testing Description 2",
                             Name = "Test Merchant 2"
                         },
                         new
                         {
-                            MerchantID = new Guid("56e889d8-e8de-4bbe-85aa-bae7e959e21f"),
+                            MerchantID = new Guid("d1d06695-c933-4f89-b780-c42af2d620b2"),
                             Active = true,
                             Description = "Testing Description 3",
                             Name = "Test Merchant 3"
                         });
-                });
-
-            modelBuilder.Entity("Checkout.Data.Model.Transaction", b =>
-                {
-                    b.Property<Guid>("TransactionID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Amount");
-
-                    b.Property<Guid>("BankReferenceID");
-
-                    b.Property<int>("CardID");
-
-                    b.Property<int>("CurrencyID");
-
-                    b.Property<Guid>("MerchantID");
-
-                    b.HasKey("TransactionID");
-
-                    b.HasIndex("CardID");
-
-                    b.HasIndex("CurrencyID");
-
-                    b.HasIndex("MerchantID");
-
-                    b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("Checkout.Data.Model.Transaction", b =>
-                {
-                    b.HasOne("Checkout.Data.Model.CardDetails", "Card")
-                        .WithMany()
-                        .HasForeignKey("CardID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Checkout.Data.Model.Currency", "Currency")
-                        .WithMany()
-                        .HasForeignKey("CurrencyID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Checkout.Data.Model.Merchant", "Merchant")
-                        .WithMany()
-                        .HasForeignKey("MerchantID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -4,14 +4,16 @@ using Checkout.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Checkout.Data.Migrations
 {
     [DbContext(typeof(CheckoutDBContext))]
-    partial class CheckoutDBContextModelSnapshot : ModelSnapshot
+    [Migration("20191111111120_TransactionMigration2")]
+    partial class TransactionMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,21 +90,21 @@ namespace Checkout.Data.Migrations
                     b.HasData(
                         new
                         {
-                            MerchantID = new Guid("f16b33c1-055e-44c9-b574-ef329648a654"),
+                            MerchantID = new Guid("aeb1b512-f858-4434-89a3-1ef7e61e143e"),
                             Active = true,
                             Description = "Testing Description 1",
                             Name = "Test Merchant 1"
                         },
                         new
                         {
-                            MerchantID = new Guid("467e46fb-d389-4d6e-a689-fc41d4f3fc45"),
+                            MerchantID = new Guid("456a1557-3ba6-4361-af4e-1324e8eca181"),
                             Active = true,
                             Description = "Testing Description 2",
                             Name = "Test Merchant 2"
                         },
                         new
                         {
-                            MerchantID = new Guid("56e889d8-e8de-4bbe-85aa-bae7e959e21f"),
+                            MerchantID = new Guid("65a28ed4-8006-47ca-a936-a7777506ce78"),
                             Active = true,
                             Description = "Testing Description 3",
                             Name = "Test Merchant 3"
@@ -122,15 +124,11 @@ namespace Checkout.Data.Migrations
 
                     b.Property<int>("CurrencyID");
 
-                    b.Property<Guid>("MerchantID");
-
                     b.HasKey("TransactionID");
 
                     b.HasIndex("CardID");
 
                     b.HasIndex("CurrencyID");
-
-                    b.HasIndex("MerchantID");
 
                     b.ToTable("Transactions");
                 });
@@ -145,11 +143,6 @@ namespace Checkout.Data.Migrations
                     b.HasOne("Checkout.Data.Model.Currency", "Currency")
                         .WithMany()
                         .HasForeignKey("CurrencyID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Checkout.Data.Model.Merchant", "Merchant")
-                        .WithMany()
-                        .HasForeignKey("MerchantID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -20,6 +20,7 @@ namespace Checkout.Data
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<Merchant> Merchants { get; set; }
         public virtual DbSet<CardDetails> CardDetails { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
 
         #endregion
 
@@ -27,8 +28,9 @@ namespace Checkout.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Currency>().ToTable("Currency");
-            builder.Entity<Merchant>().ToTable("Merchant");
+            builder.Entity<Currency>().ToTable("Currencies");
+            builder.Entity<Merchant>().ToTable("Merchants");
+            builder.Entity<Transaction>().ToTable("Transactions");
 
             builder.Entity<CardDetails>()
             .Property(cd => cd.CardDetailsID)

@@ -31,50 +31,51 @@ namespace Checkout.API.Controllers
         /// <summary>
         /// Process a transaction
         /// </summary>
-        /// <param name="transaction"></param>
+        /// <param name="transactionRepresenter"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("process")]
-        public async Task<IActionResult> ProcessTransaction(TransactionRepresenter transaction)
+        public async Task<IActionResult> ProcessTransaction(TransactionRepresenter transactionRepresenter)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (transaction.Amount <= 0)
+            if (transactionRepresenter.Amount <= 0)
                 return BadRequest("Amount is invalid");
 
-            bool isValid = Guid.TryParse(transaction.MerchantID, out Guid guidOutput);
+            bool isValid = Guid.TryParse(transactionRepresenter.MerchantID, out Guid guidOutput);
             if (!isValid)
                 return BadRequest("Merchant is invalid");
 
-            if (_currencyService.GetCurrency(transaction.Currency) is null)
+            if (_currencyService.GetCurrency(transactionRepresenter.Currency) is null)
                 return BadRequest("Currency not supported");
 
-            // CreditCardHelper.SaveCardDetails(transaction.Card);
-
             // Verify if the card exists and if it doesnt insert the card into the db
-            if (_cardDetailsService.GetCardDetails(transaction.Card.CardNumber) is null)
+            if (_cardDetailsService.GetCardDetails(transactionRepresenter.Card.CardNumber) is null)
             {
                 //TODO Add automapper to handle model mappings
-                var entity = new Data.Model.CardDetails
+                var cardEntity = new Data.Model.CardDetails
                 {
-                    CardNumber = transaction.Card.CardNumber,
-                    Cvv = transaction.Card.Cvv,
-                    ExpiryMonth = transaction.Card.ExpiryMonth,
-                    ExpiryYear = transaction.Card.ExpiryYear,
-                    HolderName = transaction.Card.HolderName
+                    CardNumber = transactionRepresenter.Card.CardNumber,
+                    Cvv = transactionRepresenter.Card.Cvv,
+                    ExpiryMonth = transactionRepresenter.Card.ExpiryMonth,
+                    ExpiryYear = transactionRepresenter.Card.ExpiryYear,
+                    HolderName = transactionRepresenter.Card.HolderName
                 };
 
-                _cardDetailsService.AddCard(entity);
+                _cardDetailsService.AddCard(cardEntity);
             }
 
-            var expiryConcatenated = $" {transaction.Card.ExpiryMonth}/{transaction.Card.ExpiryYear}";
-            CreditCardHelper.IsCreditCardInfoValid(transaction.Card.CardNumber, expiryConcatenated, transaction.Card.Cvv);
+            //var expiryConcatenated = $" {transaction.Card.ExpiryMonth}/{transaction.Card.ExpiryYear}";
+            //CreditCardHelper.IsCreditCardInfoValid(transaction.Card.CardNumber, expiryConcatenated, transaction.Card.Cvv);
+
+            //var transactionEntity = new Data.Model.
+
 
                 //TODO add transaction to DB with created status
 
                 //Process transaction through mock acquirer
-                var bankResponse = await APIHelper.ProcessTransactionAsync(transaction);
+                var bankResponse = await APIHelper.ProcessTransactionAsync(transactionRepresenter);
 
             //Update transaction status 
 

@@ -17,19 +17,22 @@ namespace Checkout.API.Helpers
             var yearCheck = new Regex(@"^20[0-9]{2}$");
             var cvvCheck = new Regex(@"^\d{3}$");
 
-            if (!cardCheck.IsMatch(cardNumber)) // Verify that the card number is valid
+            //Verify that the card number is valid
+            if (!cardCheck.IsMatch(cardNumber))
                 return false;
 
-            if (!cvvCheck.IsMatch(cvv)) // Verify that the cvv is valid as "999"
+            //Verify that the cvv is valid as "999"
+            if (!cvvCheck.IsMatch(cvv))
                 return false;
 
-            var dateParts = expiryDate.Split('/'); //expiry date in from MM/yyyy            
+            //Verify that the date format is valid as "MM/yyyy"
+            var dateParts = expiryDate.Split('/');      
             if (!monthCheck.IsMatch(dateParts[0]) || !yearCheck.IsMatch(dateParts[1])) 
-                return false; // Verify that the date format is valid as "MM/yyyy"
+                return false;
 
             var year = int.Parse(dateParts[1]);
             var month = int.Parse(dateParts[0]);
-            var lastDateOfExpiryMonth = DateTime.DaysInMonth(year, month); //get actual expiry date
+            var lastDateOfExpiryMonth = DateTime.DaysInMonth(year, month);
             var cardExpiry = new DateTime(year, month, lastDateOfExpiryMonth, 23, 59, 59);
 
             //Verify that the expiry is greater than today & within next 6 years <7, 8>>
