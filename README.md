@@ -15,13 +15,11 @@ https://docs.checkout.com/docs/testing
 
 #### Test Merchants 
 
-
 | Merchant        | MerchantID         
 | ------------- |:-------------:| 
 | Test Merchant 1 | 1D620903-D485-4421-958F-8265C0B41844 |
 | Test Merchant 2 | 311BFB23-11F9-44DA-B3F9-EF53DA3E6753 |
 | Test Merchant 3 | 5D161A26-91A4-4784-8DEF-FAF0A3F9E8B7 |
-
 
 #### Responses
 
@@ -29,6 +27,7 @@ To test the mock bank API responses, create a transaction with the amount listed
 
 | Amount        | Response         
 | ------------- |:-------------:| 
+| 200 | Successfull |
 | 05 | Declined - Do not honour |
 | 12 | Invalid payment |
 | 14 | Invalid card number |
@@ -46,4 +45,3 @@ To test the mock bank API responses, create a transaction with the amount listed
 | 4008 | Gateway reject - Card number blacklisted |
 | 2011 | Issuer initiated a stop payment (revocation order) for this authorization |
 | 2013 | Issuer initiated a stop payment (revocation order) for all payment |
-

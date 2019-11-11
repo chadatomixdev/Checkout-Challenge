@@ -1,11 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Checkout.Shared.Models
+﻿namespace Checkout.Shared.Models
 {
     public enum TransactionSubStatus
     {
-        InsufficientFunds
+        DeclinedDonothonour,
+        InvalidPayment,
+        InvalidCardNumber,
+        InsufficientFunds,
+        BadTrackData,
+        RestrictedCard,
+        SecurityViolation,
+        ResponseTimeout,
+        CardNot3DSecureEnabled,
+        UnableToSpecifyIfCardIsSecureEnabled,
+        SecureSystemMalfunction3DSecure,
+        SecureAuthenticationRequired3DSecure,
+        ExpiredCard,
+        PaymentBlockedDueToRisk,
+        CardNumberBlacklisted,
+        StopPaymenttThisAuth,
+        StopPaymentAll,
+        Successfull
     }
 }
