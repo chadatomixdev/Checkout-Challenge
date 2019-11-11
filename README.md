@@ -13,6 +13,14 @@ Test data based on checkout documentation responses
 
 https://docs.checkout.com/docs/testing
 
+#### Tesy Currencies
+
+| Currency Code
+| ------------- |
+| ZAR
+| USD
+| GBP
+
 #### Test Merchants 
 
 | Merchant        | MerchantID         
