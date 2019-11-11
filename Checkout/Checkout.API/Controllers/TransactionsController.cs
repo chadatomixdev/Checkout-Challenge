@@ -102,11 +102,11 @@ namespace Checkout.API.Controllers
             _transactionService.CreateTransaction(transactionEntity);
 
             //Process transaction through mock acquirer
-            var bankResponse = await APIHelper.ProcessTransactionAsync(transactionRepresenter);
+            var bankResponse =  await APIHelper.ProcessTransactionAsync(transactionRepresenter);
 
-            //Update transaction status 
+            //_transactionService.UpdateTransaction()
 
-            return Ok();
+            return Ok(bankResponse.Content.ReadAsStringAsync());
         }
 
         /// <summary>

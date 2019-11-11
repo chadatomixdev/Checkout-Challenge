@@ -46,5 +46,15 @@ namespace Checkout.API.Services
 
              return _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
         }
+
+        /// <summary>
+        /// Update the transaction
+        /// </summary>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
+        public void UpdateTransaction(Transaction transaction)
+        {
+            _contextService.Update(transaction);
+        }
     }
 }

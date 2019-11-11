@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Checkout.API.Helpers
 {
     public static class APIHelper
     {
-        public static async Task<bool> ProcessTransactionAsync(TransactionRepresenter transaction)
+        public static async Task<HttpResponseMessage> ProcessTransactionAsync(TransactionRepresenter transaction)
         {
             var url = WebRequestHelper.BaseUrl + "Transactions/transactions";
 
@@ -22,13 +23,7 @@ namespace Checkout.API.Helpers
                 ["CardExpiryYear"] = transaction.Card.ExpiryYear
             };
 
-            var response = await WebRequestHelper.MakeAsyncRequest(url, content);
-
-
-            if (response.IsSuccessStatusCode)
-                return true;
-
-            return false;
+           return await WebRequestHelper.MakeAsyncRequest(url, content);
         }
     }
 }
