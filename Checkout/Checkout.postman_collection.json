@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "5a525363-11cb-41a0-a50a-8fddee560783",
+		"name": "Checkout",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Debug",
+			"item": [
+				{
+					"name": "Post Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json\"",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"currency\": \"ZAR\",\r\n  \"merchantID\": \"string\",\r\n  \"amount\": 60,\r\n    \"card\": {\r\n    \"cardNumber\": \"string\",\r\n    \"cvv\": \"string\",\r\n    \"holderName\": \"string\",\r\n    \"expiryMonth\": \"string\",\r\n    \"expiryYear\": \"string\"\r\n  },\r\n      \"merchantID\": \"1D620903-D485-4421-958F-8265C0B41844\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50215/Transactions/process",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50215",
+							"path": [
+								"Transactions",
+								"process"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mock Bank Process",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json\""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:50214/Transactions/transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "50214",
+							"path": [
+								"Transactions",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Production",
+			"item": [
+				{
+					"name": "Post Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json\"",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"currency\": \"GBP\",\r\n  \"merchantID\": \"72FC3389-B745-485B-8D34-903FB130004E\",\r\n  \"amount\": 200,\r\n    \"card\": {\r\n    \"cardNumber\": \"string\",\r\n    \"cvv\": \"string\",\r\n    \"holderName\": \"string\",\r\n    \"expiryMonth\": \"string\",\r\n    \"expiryYear\": \"string\"\r\n  },\r\n    \"merchantID\": \"1D620903-D485-4421-958F-8265C0B41844\"\r\n}"
+						},
+						"url": {
+							"raw": "https://checkoutchallengeapi.azurewebsites.net/Transactions/process",
+							"protocol": "https",
+							"host": [
+								"checkoutchallengeapi",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Transactions",
+								"process"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mock Bank Process",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json\""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"TransactionAmount\": 200,\r\n    \"cardNumber\": \"string\",\r\n    \"CardCvv\": \"string\",\r\n    \"CardHolderName\": \"string\",\r\n    \"CardExpiryMonth\": \"string\",\r\n    \"CardExpiryYear\": \"string\"\r\n}"
+						},
+						"url": {
+							"raw": "https://checkoutmockbank.azurewebsites.net/Transactions/transactions",
+							"protocol": "https",
+							"host": [
+								"checkoutmockbank",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"Transactions",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
