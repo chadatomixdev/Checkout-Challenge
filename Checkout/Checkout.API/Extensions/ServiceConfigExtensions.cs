@@ -31,6 +31,8 @@ namespace Checkout.API.Extensions
             services.AddScoped<RepositoryService>();
             services.AddScoped<Checkout.API.Services.CurrencyService>();
             services.AddScoped<CardDetailsService>();
+            services.AddScoped<MerchantService>();
+            services.AddScoped<TransactionService>();
 
             return services;
         }

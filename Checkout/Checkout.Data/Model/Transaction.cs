@@ -1,11 +1,19 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Checkout.Data.Model
 {
     public class Transaction
     {
+        [Key]
         public Guid TransactionID { get; set; }
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
+
+        [MaxLength(20)]
+        public string Status { get; set; }
+        [MaxLength(100)]
+        public string SubStatus { get; set; }
+
         public int CurrencyID { get; set; }
         public int CardID { get; set; }
         public Guid MerchantID { get; set; }
