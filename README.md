@@ -6,6 +6,7 @@ Interview assignment .NET challenge 2.0 for checkout.com - Building a Payment Ga
 * Payment Gateway API https://checkoutchallengeapi.azurewebsites.net/index.html
 * Mock Bank API https://checkoutmockbank.azurewebsites.net/
 * Azure DB - checkoutchallenge.database.windows.net
+* Application Metrics - https://checkoutchallengeapi.azurewebsites.net/metrics
 
 ### Test Data
 
