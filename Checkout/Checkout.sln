@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.MockBank", "Checko
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Data", "Checkout.Data\Checkout.Data.csproj", "{0BB28A4D-FCDF-4882-BD97-1C69251ACD86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Shared", "Checkout.Shared\Checkout.Shared.csproj", "{1F112AB2-6039-4FFB-A83C-D611BCA0E155}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Checkout.Shared", "Checkout.Shared\Checkout.Shared.csproj", "{1F112AB2-6039-4FFB-A83C-D611BCA0E155}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

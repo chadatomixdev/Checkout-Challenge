@@ -11,3 +11,9 @@ Run the EF commands from Visual Studio package manger console or powershell. Not
 ##### Update Database
 
 `Update-Database`
+
+### Debugging
+
+The solution is setup using conditional compilation symbols to either point to the hosted MockBank or a locally running version dependant on if you are running Checkout.API in debug or release mode.
+
+If running the API locally in debug mode you will need to start an instance of Checkout.MockBank

@@ -92,6 +92,7 @@ namespace Checkout.API.Controllers
             //var expiryConcatenated = $" {transaction.Card.ExpiryMonth}/{transaction.Card.ExpiryYear}";
             //CreditCardHelper.IsCreditCardInfoValid(transaction.Card.CardNumber, expiryConcatenated, transaction.Card.Cvv);
 
+            //TODO Fix Bug Leading zeros on Amount
             var transactionEntity = new Data.Model.Transaction
             {
                 Amount = transactionRepresenter.Amount,
@@ -117,7 +118,7 @@ namespace Checkout.API.Controllers
             transactionCreationRepresenter.BankResponseID = json.BankResponseID;
             transactionCreationRepresenter.Status = json.Status.ToString();
             transactionCreationRepresenter.SubStatus = json.SubStatus.ToString();
-
+            transactionCreationRepresenter.TransactionID = transactionEntity.TransactionID;
 
             //TODO Update Transaction in the DB with the Bank response and new Status
             //_transactionService.UpdateTransaction()

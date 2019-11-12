@@ -23,8 +23,8 @@ namespace Checkout.MockBank.Controllers
             {
                 case 200:
                     response.BankResponseID = Guid.NewGuid();
-                    response.Status = TransactionStatus.Successfull;
-                    response.SubStatus = TransactionSubStatus.Successfull;
+                    response.Status = TransactionStatus.Successful;
+                    response.SubStatus = TransactionSubStatus.Successful;
                     break;
                 case 05:
                     response.BankResponseID = Guid.NewGuid();
@@ -113,8 +113,8 @@ namespace Checkout.MockBank.Controllers
                     break;
                 default:
                     response.BankResponseID = Guid.NewGuid();
-                    response.Status = TransactionStatus.Successfull;
-                    response.SubStatus = TransactionSubStatus.Successfull;
+                    response.Status = TransactionStatus.Successful;
+                    response.SubStatus = TransactionSubStatus.Successful;
                     break;
             }
 

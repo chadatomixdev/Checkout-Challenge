@@ -10,5 +10,6 @@ namespace Checkout.API.Representers
         public Guid BankResponseID { get; set; }
         public string Status { get; set; }
         public string SubStatus { get; set; }
+        public Guid TransactionID { get; set; }
     }
 }
