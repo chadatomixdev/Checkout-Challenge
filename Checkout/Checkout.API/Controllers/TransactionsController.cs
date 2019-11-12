@@ -62,7 +62,7 @@ namespace Checkout.API.Controllers
                 return BadRequest("Currency not supported");
 
             var currency = new Currency();
-            currency = _currencyService.GetCurrency(transactionRepresenter.Currency);
+            currency = _currencyService.GetCurrencyByName(transactionRepresenter.Currency);
 
             if (currency is null)
                 return BadRequest("Currency not supported");
@@ -70,7 +70,7 @@ namespace Checkout.API.Controllers
             #endregion
 
             var cardEntity = new Data.Model.CardDetails();
-            cardEntity = _cardDetailsService.GetCardDetails(transactionRepresenter.Card.CardNumber);
+            cardEntity = _cardDetailsService.GetCardDetailsByNumber(transactionRepresenter.Card.CardNumber);
 
             // Verify if the card exists and if it doesnt insert the card into the db
             if (cardEntity is null)
@@ -121,7 +121,22 @@ namespace Checkout.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(_transactionService.GetTransactionById(transactionID));
+            var response = new TransactionResponseRepresenter();
+
+            var entity = _transactionService.GetTransactionById(transactionID);
+
+            var currency = _currencyService.GetCurrencyByID(entity.CurrencyID);
+            response.Currency = currency.Name;
+            
+            response.Amount = entity.Amount;
+            response.BankReferenceID = entity.BankReferenceID;
+            response.Status = entity.Status;
+            response.SubStatus = entity.SubStatus;
+
+            var card = _cardDetailsService.GetCardDetailsByID(entity.CardID);
+            response.Card = card;
+
+            return Ok(response);
         }
 
         /// <summary>

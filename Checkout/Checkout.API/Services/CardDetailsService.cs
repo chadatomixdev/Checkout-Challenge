@@ -17,13 +17,23 @@ namespace Checkout.API.Services
         }
 
         /// <summary>
-        /// Search the by for existing cards by card number
+        /// Search for existing card by card number
         /// </summary>
         /// <param name="cardNumber"></param>
         /// <returns></returns>
-        public CardDetails GetCardDetails(string cardNumber)
+        public CardDetails GetCardDetailsByNumber(string cardNumber)
         {
             return _contextService.Find<CardDetails>(cd => cd.CardNumber == cardNumber).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Search for existing card by card ID
+        /// </summary>
+        /// <param name="cardID"></param>
+        /// <returns></returns>
+        public CardDetails GetCardDetailsByID(int cardID)
+        {
+            return _contextService.Find<CardDetails>(cd => cd.CardDetailsID == cardID).FirstOrDefault();
         }
 
         /// <summary>
