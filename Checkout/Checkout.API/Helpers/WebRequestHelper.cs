@@ -10,7 +10,7 @@ namespace Checkout.API.Helpers
     {
 
 #if DEBUG
-        public static string BaseUrl => "http://localhost:50214/";
+        public static string BaseUrl => "http://localhost:62268/";
 #endif
 
 #if RELEASE

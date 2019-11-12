@@ -59,7 +59,7 @@ namespace Checkout.API.Controllers
             merchant = _merchantService.GetMerchant(Guid.Parse(transactionRepresenter.MerchantID));
 
             if (merchant is null)
-                return BadRequest("Currency not supported");
+                return BadRequest("Merchant is invalid");
 
             var currency = new Currency();
             currency = _currencyService.GetCurrencyByName(transactionRepresenter.Currency);
@@ -75,14 +75,17 @@ namespace Checkout.API.Controllers
             // Verify if the card exists and if it doesnt insert the card into the db
             if (cardEntity is null)
             {
-                    //TODO Add automapper to handle model mappings
-                    cardEntity.CardNumber = transactionRepresenter.Card.CardNumber;
-                    cardEntity.Cvv = transactionRepresenter.Card.Cvv;
-                    cardEntity.ExpiryMonth = transactionRepresenter.Card.ExpiryMonth;
-                    cardEntity.ExpiryYear = transactionRepresenter.Card.ExpiryYear;
-                    cardEntity.HolderName = transactionRepresenter.Card.HolderName;
-             
-                    _cardDetailsService.AddCard(cardEntity);
+                //TODO Add automapper to handle model mappings
+                cardEntity = new CardDetails
+                {
+                    CardNumber = transactionRepresenter.Card.CardNumber,
+                    Cvv = transactionRepresenter.Card.Cvv,
+                    ExpiryMonth = transactionRepresenter.Card.ExpiryMonth,
+                    ExpiryYear = transactionRepresenter.Card.ExpiryYear,
+                    HolderName = transactionRepresenter.Card.HolderName
+                };
+
+                _cardDetailsService.AddCard(cardEntity);
             };
 
             //var expiryConcatenated = $" {transaction.Card.ExpiryMonth}/{transaction.Card.ExpiryYear}";
@@ -106,7 +109,7 @@ namespace Checkout.API.Controllers
 
             //_transactionService.UpdateTransaction()
 
-            return Ok(bankResponse.Content.ReadAsStringAsync());
+            return Ok(bankResponse.Content.ReadAsStringAsync().Result);
         }
 
         /// <summary>
@@ -134,6 +137,8 @@ namespace Checkout.API.Controllers
             response.SubStatus = entity.SubStatus;
 
             var card = _cardDetailsService.GetCardDetailsByID(entity.CardID);
+
+            card.CardNumber = CreditCardHelper.MaskCardNumber(card.CardNumber);
             response.Card = card;
 
             return Ok(response);

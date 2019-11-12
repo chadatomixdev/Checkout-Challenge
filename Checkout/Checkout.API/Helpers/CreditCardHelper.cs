@@ -10,6 +10,15 @@ namespace Checkout.API.Helpers
 {
     public class CreditCardHelper
     {
+
+        //See https://en.wikipedia.org/wiki/Luhn_algorithm
+        /// <summary>
+        /// Verify if the card information is valid
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <param name="expiryDate"></param>
+        /// <param name="cvv"></param>
+        /// <returns></returns>
         public static bool IsCreditCardInfoValid(string cardNumber, string expiryDate, string cvv)
         {
             var cardCheck = new Regex(@"^(1298|1267|4512|4567|8901|8933)([\-\s]?[0-9]{4}){3}$");
@@ -37,6 +46,24 @@ namespace Checkout.API.Helpers
 
             //Verify that the expiry is greater than today & within next 6 years <7, 8>>
             return (cardExpiry > DateTime.Now && cardExpiry < DateTime.Now.AddYears(6));
+        }
+
+        /// <summary>
+        /// Mask the card number returned to the merchant
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <returns></returns>
+        public static string MaskCardNumber(string cardNumber)
+        {
+            var firstDigits = cardNumber.Substring(0, 6);
+            var lastDigits = cardNumber.Substring(cardNumber.Length - 4, 4);
+
+            var requiredMask = new String('X', cardNumber.Length - firstDigits.Length - lastDigits.Length);
+
+            var maskedString = string.Concat(firstDigits, requiredMask, lastDigits);
+            var maskedCardNumberWithSpaces = Regex.Replace(maskedString, ".{4}", "$0 ");
+
+            return maskedString;
         }
     }
 }
