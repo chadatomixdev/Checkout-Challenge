@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Checkout.API.Extensions;
+using Checkout.API.Middleware;
 using Checkout.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Checkout.API
@@ -69,6 +71,8 @@ namespace Checkout.API
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseMetricServer();
+            app.UseRequestMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
