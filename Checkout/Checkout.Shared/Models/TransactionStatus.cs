@@ -4,7 +4,7 @@
     {
         Created,
         Cancelled,
-        Successfull,
+        Successful,
         Failed
     }
 }

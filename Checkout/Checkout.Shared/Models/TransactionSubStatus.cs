@@ -19,6 +19,6 @@
         CardNumberBlacklisted,
         StopPaymenttThisAuth,
         StopPaymentAll,
-        Successfull
+        Successful
     }
 }

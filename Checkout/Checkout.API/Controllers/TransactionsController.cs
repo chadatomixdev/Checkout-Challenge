@@ -7,6 +7,7 @@ using Checkout.Data.Model;
 using Checkout.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Checkout.API.Controllers
 {
@@ -91,25 +92,37 @@ namespace Checkout.API.Controllers
             //var expiryConcatenated = $" {transaction.Card.ExpiryMonth}/{transaction.Card.ExpiryYear}";
             //CreditCardHelper.IsCreditCardInfoValid(transaction.Card.CardNumber, expiryConcatenated, transaction.Card.Cvv);
 
-            var transactionEntity = new Data.Model.Transaction();
-            transactionEntity.Amount = transactionRepresenter.Amount;
-            transactionEntity.Card = cardEntity;
-            transactionEntity.CardID = cardEntity.CardDetailsID;
-            transactionEntity.Currency = currency;
-            transactionEntity.CurrencyID = currency.CurrencyId;
-            transactionEntity.Merchant = merchant;
-            transactionEntity.MerchantID = merchant.MerchantID;
-            transactionEntity.Status = TransactionStatus.Created.ToString();
-            transactionEntity.TransactionID = Guid.NewGuid();
+            var transactionEntity = new Data.Model.Transaction
+            {
+                Amount = transactionRepresenter.Amount,
+                Card = cardEntity,
+                CardID = cardEntity.CardDetailsID,
+                Currency = currency,
+                CurrencyID = currency.CurrencyId,
+                Merchant = merchant,
+                MerchantID = merchant.MerchantID,
+                Status = TransactionStatus.Created.ToString(),
+                TransactionID = Guid.NewGuid()
+            };
 
             _transactionService.CreateTransaction(transactionEntity);
 
             //Process transaction through mock acquirer
             var bankResponse =  await APIHelper.ProcessTransactionAsync(transactionRepresenter);
+            var bankResponseData = bankResponse.Content.ReadAsStringAsync().Result;
 
+           var json = JsonConvert.DeserializeObject<BankResponse>(bankResponseData);
+           var transactionCreationRepresenter = new TransactionCreationRepresenter();
+
+            transactionCreationRepresenter.BankResponseID = json.BankResponseID;
+            transactionCreationRepresenter.Status = json.Status.ToString();
+            transactionCreationRepresenter.SubStatus = json.SubStatus.ToString();
+
+
+            //TODO Update Transaction in the DB with the Bank response and new Status
             //_transactionService.UpdateTransaction()
 
-            return Ok(bankResponse.Content.ReadAsStringAsync().Result);
+            return Ok(transactionCreationRepresenter);
         }
 
         /// <summary>
