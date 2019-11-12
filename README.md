@@ -13,13 +13,22 @@ Test data based on checkout documentation responses
 
 https://docs.checkout.com/docs/testing
 
-#### Tesy Currencies
+#### Test Currencies
 
 | Currency Code
 | ------------- |
 | ZAR
 | USD
 | GBP
+
+#### Test Cards
+
+| Card Type | Card Number | CVV |   
+| ------------- |:-------------:| :-------------:| 
+| Visa | 4242 4242 4242 4242 | 100 |
+| Visa | 4543 4740 0224 9996 | 956 |
+| Mastercard | 5436 0310 3060 6378 | 257 |
+| Mastercard | 2223 0000 1047 9399 | 299 |
 
 #### Test Merchants 
 
