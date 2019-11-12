@@ -71,6 +71,8 @@ namespace Checkout.API
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+
+            //TODO Add prometheus docker image and grafana
             app.UseMetricServer();
             app.UseRequestMiddleware();
 
