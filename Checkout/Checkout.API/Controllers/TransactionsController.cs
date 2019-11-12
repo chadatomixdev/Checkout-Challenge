@@ -113,15 +113,19 @@ namespace Checkout.API.Controllers
             var bankResponseData = bankResponse.Content.ReadAsStringAsync().Result;
 
            var json = JsonConvert.DeserializeObject<BankResponse>(bankResponseData);
-           var transactionCreationRepresenter = new TransactionCreationRepresenter();
+            var transactionCreationRepresenter = new TransactionCreationRepresenter
+            {
+                BankResponseID = json.BankResponseID,
+                Status = json.Status.ToString(),
+                SubStatus = json.SubStatus.ToString(),
+                TransactionID = transactionEntity.TransactionID
+            };
 
-            transactionCreationRepresenter.BankResponseID = json.BankResponseID;
-            transactionCreationRepresenter.Status = json.Status.ToString();
-            transactionCreationRepresenter.SubStatus = json.SubStatus.ToString();
-            transactionCreationRepresenter.TransactionID = transactionEntity.TransactionID;
+            transactionEntity.BankReferenceID = json.BankResponseID;
+            transactionEntity.Status = json.Status.ToString();
+            transactionEntity.SubStatus = json.SubStatus.ToString();
 
-            //TODO Update Transaction in the DB with the Bank response and new Status
-            //_transactionService.UpdateTransaction()
+            _transactionService.UpdateTransaction(transactionEntity);
 
             return Ok(transactionCreationRepresenter);
         }
