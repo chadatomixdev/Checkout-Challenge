@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using Checkout.API.Helpers;
 using Checkout.API.Representers;
-using Checkout.API.Services;
 using Checkout.Data.Model;
+using Checkout.Shared.Interfaces;
 using Checkout.Shared.Models;
+using Checkout.Shared.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -17,15 +18,15 @@ namespace Checkout.API.Controllers
     {
         #region Properties
 
-        private readonly CurrencyService _currencyService;
-        private readonly CardDetailsService _cardDetailsService;
-        private readonly MerchantService _merchantService;
-        private readonly TransactionService _transactionService;
+        private readonly ICurrencyService _currencyService;
+        private readonly ICardDetailsService _cardDetailsService;
+        private readonly IMerchantService _merchantService;
+        private readonly ITransactionService _transactionService;
 
         #endregion
 
         #region Constructor
-        public TransactionsController(CurrencyService currencyService, CardDetailsService cardDetailsService, MerchantService merchantService, TransactionService transactionService)
+        public TransactionsController(ICurrencyService currencyService, ICardDetailsService cardDetailsService, IMerchantService merchantService, ITransactionService transactionService)
         {
             _currencyService = currencyService;
             _cardDetailsService = cardDetailsService;

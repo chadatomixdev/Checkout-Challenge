@@ -1,13 +1,13 @@
 ﻿using Checkout.Data.Model;
 using Checkout.Data.Services;
+using Checkout.Shared.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace Checkout.API.Services
+namespace Checkout.Shared.Services
 {
-    public class TransactionService
+    public class TransactionService : ITransactionService
     {
         private readonly RepositoryService _contextService;
         public TransactionService(RepositoryService contextService)
@@ -44,7 +44,7 @@ namespace Checkout.API.Services
         {
             var transaction = _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
 
-             return _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
+            return _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
         }
 
         /// <summary>

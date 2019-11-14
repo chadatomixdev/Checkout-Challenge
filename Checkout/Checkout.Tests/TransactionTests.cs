@@ -6,11 +6,8 @@ namespace Checkout.Tests
     {
         const string baseURL = "https://checkoutchallengeapi.azurewebsites.net/";
 
-    //TODO Complete implementation of Positive and Negative Checks for processing a transaction
-    [Theory]
-    [InlineData(10.00)]
-    //[InlineData(50.00, "CVV")]
-    public void PostTransactionTest(decimal amount)
+        [Fact]
+        public void ProcessTransactionTest()
     {
         //var data = CreateTransactionModelHelper.GetModelTestData(name, surname, email);
         //var response = _apiService.PostTransaction(data);

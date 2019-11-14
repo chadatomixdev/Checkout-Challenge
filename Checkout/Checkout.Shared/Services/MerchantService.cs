@@ -1,13 +1,12 @@
 ﻿using Checkout.Data.Model;
 using Checkout.Data.Services;
+using Checkout.Shared.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace Checkout.API.Services
+namespace Checkout.Shared.Services
 {
-    public class MerchantService
+    public class MerchantService : IMerchantService
     {
         private readonly RepositoryService _contextService;
 

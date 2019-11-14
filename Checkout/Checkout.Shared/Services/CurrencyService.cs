@@ -1,16 +1,14 @@
 ﻿using Checkout.Data.Model;
 using Checkout.Data.Services;
-using System;
+using Checkout.Shared.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace Checkout.API.Services
+namespace Checkout.Shared.Services
 {
-    public class CurrencyService
+    public class CurrencyService : ICurrencyService
     {
         private readonly RepositoryService _contextService;
-
         public CurrencyService(RepositoryService contextService)
         {
             _contextService = contextService;

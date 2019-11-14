@@ -1,5 +1,4 @@
 ﻿using Checkout.API.Models;
-using Checkout.API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

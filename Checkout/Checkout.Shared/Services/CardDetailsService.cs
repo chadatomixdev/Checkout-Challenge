@@ -1,13 +1,11 @@
 ﻿using Checkout.Data.Model;
 using Checkout.Data.Services;
-using System;
-using System.Collections.Generic;
+using Checkout.Shared.Interfaces;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace Checkout.API.Services
+namespace Checkout.Shared.Services
 {
-    public class CardDetailsService
+    public class CardDetailsService : ICardDetailsService
     {
         private readonly RepositoryService _contextService;
 
