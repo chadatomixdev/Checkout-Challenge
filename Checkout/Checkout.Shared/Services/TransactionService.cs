@@ -42,8 +42,6 @@ namespace Checkout.Shared.Services
         /// <returns></returns>
         public List<Transaction> GetTransactionsByMerchantID(Guid merchantID)
         {
-            var transaction = _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
-
             return _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
         }
 

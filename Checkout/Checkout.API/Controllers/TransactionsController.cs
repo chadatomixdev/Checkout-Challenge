@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Checkout.API.Helpers;
 using Checkout.API.Representers;
@@ -138,7 +140,10 @@ namespace Checkout.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetTransactionById")]
-        public IActionResult GetTransactionById(Guid transactionID)
+        //TODO FIX Swagger schema
+        //[ProducesResponseType(typeof(TransactionResponseRepresenter), (int)HttpStatusCode.OK)]
+        //public async Task<ActionResult<List<Transaction>>> GetTransactionById(Guid transactionID)
+        public async Task<ActionResult<TransactionsController>> GetTransactionById(Guid transactionID)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -169,11 +174,13 @@ namespace Checkout.API.Controllers
         /// <param name="merchantID"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetTransactions")]
+        [Route("GetTransactionsByMerchantID")]
         public IActionResult GetTransactionsByMerchantID(Guid merchantID)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            var t = _transactionService.GetTransactionsByMerchantID(merchantID);
 
             return Ok(_transactionService.GetTransactionsByMerchantID(merchantID));
         }
