@@ -40,7 +40,7 @@ namespace Checkout.Shared.Services
         /// </summary>
         /// <param name="merchantID"></param>
         /// <returns></returns>
-        public List<Transaction> GetTransactions(Guid merchantID)
+        public List<Transaction> GetTransactionsByMerchantID(Guid merchantID)
         {
             var transaction = _contextService.Find<Transaction>(t => t.MerchantID == merchantID).ToList();
 

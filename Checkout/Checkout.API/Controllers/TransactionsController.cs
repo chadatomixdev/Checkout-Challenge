@@ -170,12 +170,12 @@ namespace Checkout.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetTransactions")]
-        public IActionResult GetTransactions(Guid merchantID)
+        public IActionResult GetTransactionsByMerchantID(Guid merchantID)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(_transactionService.GetTransactions(merchantID));
+            return Ok(_transactionService.GetTransactionsByMerchantID(merchantID));
         }
     }
 }

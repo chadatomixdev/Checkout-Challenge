@@ -8,7 +8,7 @@ namespace Checkout.Shared.Interfaces
     {
         void CreateTransaction(Transaction entity);
         Transaction GetTransactionById(Guid transactionID);
-        List<Transaction> GetTransactions(Guid merchantID);
+        List<Transaction> GetTransactionsByMerchantID(Guid merchantID);
         void UpdateTransaction(Transaction transaction);
     }
 }
