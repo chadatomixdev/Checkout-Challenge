@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Checkout.API.Helpers
+namespace Checkout.Shared.Helpers
 {
     public static class WebRequestHelper
     {

@@ -1,11 +1,11 @@
-﻿using Checkout.API.Representers;
+﻿using Checkout.Shared.Representers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Checkout.API.Helpers
+namespace Checkout.Shared.Helpers
 {
     public static class APIHelper
     {
@@ -23,7 +23,7 @@ namespace Checkout.API.Helpers
                 ["CardExpiryYear"] = transaction.Card.ExpiryYear
             };
 
-           return await WebRequestHelper.MakeAsyncRequest(url, content);
+            return await WebRequestHelper.MakeAsyncRequest(url, content);
         }
     }
 }

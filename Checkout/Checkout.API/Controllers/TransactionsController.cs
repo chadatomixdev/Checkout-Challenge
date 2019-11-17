@@ -7,6 +7,7 @@ using Checkout.API.Representers;
 using Checkout.Data.Model;
 using Checkout.Shared.Interfaces;
 using Checkout.Shared.Models;
+using Checkout.Shared.Representers;
 using Checkout.Shared.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -121,26 +122,17 @@ namespace Checkout.API.Controllers
 
             _transactionService.CreateTransaction(transactionEntity);
 
-            //Process transaction through mock acquirer
-            var bankResponse =  await APIHelper.ProcessTransactionAsync(transactionRepresenter, bank.BankURL);
-            var bankResponseData = bankResponse.Content.ReadAsStringAsync().Result;
+            var createdTransaction = _bankService.ProcessTransaction(transactionRepresenter, bank.BankURL).Result;
+            createdTransaction.TransactionID = transactionEntity.TransactionID;
 
-           var json = JsonConvert.DeserializeObject<BankResponse>(bankResponseData);
-            var transactionCreationRepresenter = new TransactionCreationRepresenter
-            {
-                BankResponseID = json.BankResponseID,
-                Status = json.Status.ToString(),
-                SubStatus = json.SubStatus.ToString(),
-                TransactionID = transactionEntity.TransactionID
-            };
-
-            transactionEntity.BankReferenceID = json.BankResponseID;
-            transactionEntity.Status = json.Status.ToString();
-            transactionEntity.SubStatus = json.SubStatus.ToString();
+            //Update the transactioon with the bank response
+            transactionEntity.BankReferenceID = createdTransaction.BankResponseID;
+            transactionEntity.Status = createdTransaction.Status.ToString();
+            transactionEntity.SubStatus = createdTransaction.SubStatus.ToString();
 
             _transactionService.UpdateTransaction(transactionEntity);
 
-            return Ok(transactionCreationRepresenter);
+            return Ok(createdTransaction);
         }
 
         /// <summary>

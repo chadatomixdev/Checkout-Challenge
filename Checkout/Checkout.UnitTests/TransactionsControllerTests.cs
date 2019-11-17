@@ -1,12 +1,12 @@
 ﻿using Checkout.API.Controllers;
+using Checkout.API.Representers;
 using Checkout.Data.Model;
 using Checkout.Shared.Interfaces;
+using Checkout.Shared.Representers;
 using Checkout.UnitTests.Fakes;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Checkout.UnitTests
@@ -33,16 +33,53 @@ namespace Checkout.UnitTests
 
         #region ProcessTransaction Tests
 
+        [Fact]
+        public void PostTransaction_ValidObjectPassed_ReturnsCreatedResponse()
+        {
+            // Arrange
+            var card = new CardDetails { CardNumber = "4242 4242 4242 4242", Cvv = "100", HolderName = "CHADTBONTHUYS", ExpiryMonth = "11", ExpiryYear = "19" };
+            var _transaction = new TransactionRepresenter { Amount = 200, Currency = "GBP", Bank = "MockBank", Card = card, MerchantID = "1D620903-D485-4421-958F-8265C0B41844" };
 
+            // Act
+            var createdResponse = _transactionsController.ProcessTransaction(_transaction);
+
+            // Assert
+            Assert.IsType<CreatedAtActionResult>(createdResponse);
+        }
 
         #endregion
-
 
         #region GetTransactionByTransactionID Tests
 
+        [Fact]
+        public void GetTransactionById_ExistingGuidPassed_ReturnsOkResult()
+        {
+            // Arrange
+            var transactionGuid = new Guid("CDE77BD3-8714-47AC-A3C3-212F10FFAEB6");
+
+            // Act
+            var okResult = _transactionsController.GetTransactionById(transactionGuid);
+
+            // Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void GetTransactionById_ExistingGuidPassed_ReturnsRightItem()
+        {
+            // Arrange
+            var transactionGuid = new Guid("CDE77BD3-8714-47AC-A3C3-212F10FFAEB6");
+            var bankReferenceID = "3ec61fc4-8801-4131-8c7e-1128a2d10273";
+
+            // Act
+            var okResult = _transactionsController.GetTransactionById(transactionGuid) as OkObjectResult;
+
+            // Assert
+            Assert.IsType<TransactionResponseRepresenter>(okResult.Value);
+            Assert.Equal(bankReferenceID, (okResult.Value as TransactionResponseRepresenter).BankReferenceID.ToString());
+        }
+
         #endregion
-
-
 
         #region GetTransactionsByMerchantID Tests
 

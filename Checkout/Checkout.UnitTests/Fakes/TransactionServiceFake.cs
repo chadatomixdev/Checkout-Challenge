@@ -8,10 +8,20 @@ namespace Checkout.UnitTests.Fakes
 {
     public class TransactionServiceFake : BaseFake, ITransactionService
     {
+        public Currency Currency = new Currency();
+        public Merchant Merchant = new Merchant();
+        public CardDetails CardDetailsFake = new CardDetails();
+
+        public TransactionServiceFake()
+        {
+            Currency = Currencies[2];
+            Merchant = Merchants[0];
+            CardDetailsFake = CardDetails[0];
+        }
+
         public void CreateTransaction(Transaction entity)
         {
-            var _transaction = new Transaction { TransactionID = Guid.Parse("70DCAC8B-3F5B-4878-A302-B41111821461"), Amount = 200, Card = CardDetails[0], CardID = CardDetails[0].CardDetailsID, BankReferenceID = Guid.Parse("6CEF9C79-FE93-4DA9-A985-6A4341929AC6"), Currency = Currencies[2], CurrencyID = Currencies[2].CurrencyId, Merchant = Merchants[0], MerchantID = Merchants[0].MerchantID, Status = "Successful", SubStatus = "Successful" };
-            Transactions.Add(_transaction);
+            Transactions.Add(entity);
         }
 
         public Transaction GetTransactionById(Guid transactionID)

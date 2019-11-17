@@ -1,16 +1,15 @@
-﻿using Checkout.API.Models;
+﻿using Checkout.Data.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Checkout.API.Representers
+namespace Checkout.Shared.Representers
 {
     public class TransactionRepresenter
     {
         public string Currency { get; set; }
         public decimal Amount { get; set; }
-        public CardDetails Card { get;set; }
+        public CardDetails Card { get; set; }
         public string MerchantID { get; set; }
         public string Bank { get; set; }
     }

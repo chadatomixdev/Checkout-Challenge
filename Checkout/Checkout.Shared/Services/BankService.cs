@@ -1,8 +1,13 @@
 ﻿using Checkout.Data.Model;
 using Checkout.Data.Services;
+using Checkout.Shared.Helpers;
 using Checkout.Shared.Interfaces;
+using Checkout.Shared.Models;
+using Checkout.Shared.Representers;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Checkout.Shared.Services
 {
@@ -23,6 +28,23 @@ namespace Checkout.Shared.Services
         public Bank GetBankByName(string bank)
         {
             return _contextService.Find<Bank>(b => b.BankName == bank).FirstOrDefault();
+        }
+
+        public async Task<TransactionCreationRepresenter> ProcessTransaction(TransactionRepresenter transactionRepresenter, string bankURL)
+        {
+            //Process transaction through acquirer
+            var bankResponse = await APIHelper.ProcessTransactionAsync(transactionRepresenter, bankURL);
+            var bankResponseData = bankResponse.Content.ReadAsStringAsync().Result;
+
+            var json = JsonConvert.DeserializeObject<BankResponse>(bankResponseData);
+            var transactionCreationRepresenter = new TransactionCreationRepresenter
+            {
+                BankResponseID = json.BankResponseID,
+                Status = json.Status.ToString(),
+                SubStatus = json.SubStatus.ToString(),
+            };
+
+            return transactionCreationRepresenter;
         }
     }
 }
