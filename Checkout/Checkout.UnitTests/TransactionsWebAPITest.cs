@@ -51,7 +51,6 @@ namespace Checkout.UnitTests
             // Act
             var okResult = _transactionsController.GetTransactionsByMerchantID(merchantID) as OkObjectResult;
 
-
             // Assert
             var items = Assert.IsType<List<Transaction>>(okResult.Value);
             Assert.Equal(2, items.Count);

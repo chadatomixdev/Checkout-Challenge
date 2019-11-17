@@ -24,16 +24,18 @@ namespace Checkout.API.Controllers
         private readonly ICardDetailsService _cardDetailsService;
         private readonly IMerchantService _merchantService;
         private readonly ITransactionService _transactionService;
+        private readonly IBankService _bankService;
 
         #endregion
 
         #region Constructor
-        public TransactionsController(ICurrencyService currencyService, ICardDetailsService cardDetailsService, IMerchantService merchantService, ITransactionService transactionService)
+        public TransactionsController(ICurrencyService currencyService, ICardDetailsService cardDetailsService, IMerchantService merchantService, ITransactionService transactionService, IBankService bankService)
         {
             _currencyService = currencyService;
             _cardDetailsService = cardDetailsService;
             _merchantService = merchantService;
             _transactionService = transactionService;
+            _bankService = bankService;
         }
 
         #endregion
@@ -69,6 +71,12 @@ namespace Checkout.API.Controllers
             currency = _currencyService.GetCurrencyByName(transactionRepresenter.Currency);
 
             if (currency is null)
+                return BadRequest("Currency not supported");
+
+            var bank = new Bank();
+            bank = _bankService.GetBankByName(transactionRepresenter.Bank);
+
+            if (bank is null)
                 return BadRequest("Currency not supported");
 
             #endregion

@@ -23,5 +23,7 @@ namespace Checkout.Data.Model
         public Guid BankReferenceID { get; set; }
         public Currency Currency { get; set; }
         public Merchant Merchant { get; set; }
+        public int BankID { get; set; }
+        public Bank Bank { get; set; }
     }
 }

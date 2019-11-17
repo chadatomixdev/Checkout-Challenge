@@ -21,6 +21,7 @@ namespace Checkout.Data
         public virtual DbSet<Merchant> Merchants { get; set; }
         public virtual DbSet<CardDetails> CardDetails { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Bank> Banks { get; set; }
 
         #endregion
 
@@ -30,6 +31,7 @@ namespace Checkout.Data
 
             builder.Entity<Currency>().ToTable("Currencies");
             builder.Entity<Merchant>().ToTable("Merchants");
+            builder.Entity<Bank>().ToTable("Banks");
             builder.Entity<Transaction>().ToTable("Transactions");
 
             builder.Entity<CardDetails>()
@@ -48,6 +50,11 @@ namespace Checkout.Data
                     new Merchant { MerchantID = Guid.NewGuid(), Name = "Test Merchant 1", Active = true, Description = "Testing Description 1"},
                     new Merchant { MerchantID = Guid.NewGuid(), Name = "Test Merchant 2", Active = true, Description = "Testing Description 2" },
                     new Merchant { MerchantID = Guid.NewGuid(), Name = "Test Merchant 3", Active = true, Description = "Testing Description 3" }
+                );
+
+            builder.Entity<Bank>().HasData(
+                    new Bank { BankID  = 1, BankName = "MockBank", BankURL = "https://checkoutmockbank.azurewebsites.net/" },
+                    new Bank { BankID = 2, BankName = "LocalTestBank", BankURL = "http://localhost:62268/" }
                 );
 
             #endregion
