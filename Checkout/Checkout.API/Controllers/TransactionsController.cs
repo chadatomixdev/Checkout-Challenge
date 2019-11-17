@@ -140,10 +140,7 @@ namespace Checkout.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetTransactionById")]
-        //TODO FIX Swagger schema
-        //[ProducesResponseType(typeof(TransactionResponseRepresenter), (int)HttpStatusCode.OK)]
-        //public async Task<ActionResult<List<Transaction>>> GetTransactionById(Guid transactionID)
-        public async Task<ActionResult<TransactionsController>> GetTransactionById(Guid transactionID)
+        public ActionResult GetTransactionById(Guid transactionID)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -175,12 +172,10 @@ namespace Checkout.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetTransactionsByMerchantID")]
-        public IActionResult GetTransactionsByMerchantID(Guid merchantID)
+        public ActionResult GetTransactionsByMerchantID(Guid merchantID)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
-            var t = _transactionService.GetTransactionsByMerchantID(merchantID);
 
             return Ok(_transactionService.GetTransactionsByMerchantID(merchantID));
         }

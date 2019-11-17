@@ -4,6 +4,7 @@ using Checkout.Shared.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -11,45 +12,51 @@ namespace Checkout.UnitTests
 {
     public class TransactionsWebAPITest
     {
-        private readonly ICurrencyService _currencyService;
-        private readonly ICardDetailsService _cardDetailsService;
-        private readonly IMerchantService _merchantsService;
-        private readonly ITransactionService _transactionsService;
+        ICurrencyService _currencyService;
+        ICardDetailsService _cardDetailsService;
+        IMerchantService _merchantsService;
+        ITransactionService _transactionsService;
+        TransactionsController _transactionsController;
 
         public TransactionsWebAPITest()
         {
             _currencyService = new CurrencyServiceFake();
+            _merchantsService = new MerchantServiceFake();
+            _transactionsService = new TransactionServiceFake();
+            _cardDetailsService = new CardDetailsServiceFake();
+            _transactionsController = new TransactionsController(_currencyService, _cardDetailsService, _merchantsService, _transactionsService);
+        }
 
+        #region GetTransactionsByMerchantID Tests
+
+        [Fact]
+        public void GetTransactionByMerchantIDReturnsOkResult()
+        {
+            //Arrange
+            var merchantID = new Guid("1D620903-D485-4421-958F-8265C0B41844");
+
+            //Act
+            var okResult = _transactionsController.GetTransactionsByMerchantID(merchantID);
+
+            // Assert
+            Assert.IsType<OkObjectResult>(okResult);
         }
 
         [Fact]
-        public async Task GetTransactionByIDSuccess()
+        public void GetTransactionByMerchantIDReturnsAllItems()
         {
             //Arrange
-            var fakeTransaction = new Transaction();
-            var fakeCurrency = new Currency();
-            var fakeMerchant = new Merchant();
-            var transactionID = new Guid("1D620903-D485-4421-958F-8265C0B41844");
             var merchantID = new Guid("1D620903-D485-4421-958F-8265C0B41844");
 
+            // Act
+            var okResult = _transactionsController.GetTransactionsByMerchantID(merchantID) as OkObjectResult;
 
 
-
-            //_transactionsMock.Setup(t => t.GetTransactionById(transactionID))
-            //    .Returns(Task.FromResult(fakeTransaction).Result);
-
-            //_currencyMock.Setup(c => c.GetCurrencyByName("ZAR"))
-            //    .Returns(Task.FromResult(fakeCurrency).Result);
-
-            //_merchantsMock.Setup(m => m.GetMerchant(merchantID))
-            //     .Returns(Task.FromResult(fakeMerchant).Result);
-
-            //Act
-            //var transactionsController = new TransactionsController(_currencyMock.Object, _cardDetailsMock.Object, _merchantsMock.Object, _transactionsMock.Object);
-            //var actionResult = await transactionsController.GetTransactionById(transactionID);
-
-            ////Assert
-            Assert.Equal((actionResult.Result as OkObjectResult).StatusCode, (int)System.Net.HttpStatusCode.OK);
+            // Assert
+            var items = Assert.IsType<List<Transaction>>(okResult.Value);
+            Assert.Equal(2, items.Count);
         }
+
+        #endregion
     }
 }

@@ -6,21 +6,22 @@ using System.Linq;
 
 namespace Checkout.UnitTests
 {
-    public class CardDetailsServiceFake : BaseFact, ICardDetailsService
+    public class CardDetailsServiceFake : BaseFake, ICardDetailsService
     {
         public void AddCard(CardDetails card)
         {
-            throw new NotImplementedException();
+            var _cardDetails = new CardDetails { CardDetailsID = 4, CardNumber = "2223 0000 1047 9399", Cvv = "299", HolderName = "ADDTEST", ExpiryMonth = "11", ExpiryYear = "21" };
+            CardDetails.Add(_cardDetails);
         }
 
         public CardDetails GetCardDetailsByID(int cardID)
         {
-            throw new NotImplementedException();
+            return CardDetails.Where(cd => cd.CardDetailsID == cardID).FirstOrDefault();
         }
 
         public CardDetails GetCardDetailsByNumber(string cardNumber)
         {
-            throw new NotImplementedException();
+            return CardDetails.Where(cd => cd.CardNumber == cardNumber).FirstOrDefault();
         }
     }
 }

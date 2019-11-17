@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Checkout.UnitTests
 {
-    public class CurrencyServiceFake : BaseFact, ICurrencyService
+    public class CurrencyServiceFake : BaseFake, ICurrencyService
     {
         public List<Currency> GetAllCurrencies()
         {

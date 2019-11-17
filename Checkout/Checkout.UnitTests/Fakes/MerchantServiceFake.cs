@@ -2,14 +2,15 @@
 using Checkout.Shared.Interfaces;
 using Checkout.UnitTests.Fakes;
 using System;
+using System.Linq;
 
 namespace Checkout.UnitTests
 {
-    public class MerchantServiceFake : BaseFact, IMerchantService
+    public class MerchantServiceFake : BaseFake, IMerchantService
     {
         public Merchant GetMerchant(Guid merchantID)
         {
-            throw new NotImplementedException();
+            return Merchants.Where(m => m.MerchantID == merchantID).FirstOrDefault();
         }
     }
 }
