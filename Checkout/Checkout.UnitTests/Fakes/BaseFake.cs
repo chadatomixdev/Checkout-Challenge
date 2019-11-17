@@ -12,6 +12,7 @@ namespace Checkout.UnitTests.Fakes
         public List<Merchant> Merchants = new List<Merchant>();
         public List<Transaction> Transactions = new List<Transaction>();
         public List<CardDetails> CardDetails = new List<CardDetails>();
+        public List<Bank> Banks = new List<Bank>();
 
         #endregion
 
@@ -21,6 +22,7 @@ namespace Checkout.UnitTests.Fakes
             GenrateFakeMerchants();
             GenerateFakeCardDetails();
             GenerateFakeTransactions();
+            GenerateBanks();
         }
 
         private void GenerateFakeCurrencies()
@@ -65,6 +67,14 @@ namespace Checkout.UnitTests.Fakes
             Transactions.Add(_transaction1);
             Transactions.Add(_transaction2);
             Transactions.Add(_transaction3);
+        }
+        private void GenerateBanks()
+        {
+            var _bank1 = new Bank { BankID = 1, BankName = "MockBank", BankURL = "https://checkoutmockbank.azurewebsites.net/" };
+            var _bank2 = new Bank { BankID = 2, BankName = "LocalTestBank", BankURL = "http://localhost:62268/" };
+
+            Banks.Add(_bank1);
+            Banks.Add(_bank2);
         }
     }
 }

@@ -9,9 +9,9 @@ namespace Checkout.API.Helpers
 {
     public static class APIHelper
     {
-        public static async Task<HttpResponseMessage> ProcessTransactionAsync(TransactionRepresenter transaction)
+        public static async Task<HttpResponseMessage> ProcessTransactionAsync(TransactionRepresenter transaction, string bankURL)
         {
-            var url = WebRequestHelper.BaseUrl + "Transactions/transactions";
+            var url = bankURL + "Transactions/transactions";
 
             var content = new Dictionary<string, string>
             {

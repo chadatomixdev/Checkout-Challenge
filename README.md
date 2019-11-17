@@ -22,6 +22,13 @@ https://docs.checkout.com/docs/testing
 | USD
 | GBP
 
+#### Test Banks
+
+| Bank Name
+| ------------- |
+| MockBank
+| LocalTestBank
+
 #### Test Cards
 
 | Card Type | Card Number | CVV |   
@@ -35,9 +42,9 @@ https://docs.checkout.com/docs/testing
 
 | Merchant        | MerchantID         
 | ------------- |:-------------:| 
-| Test Merchant 1 | 1D620903-D485-4421-958F-8265C0B41844 |
-| Test Merchant 2 | 311BFB23-11F9-44DA-B3F9-EF53DA3E6753 |
-| Test Merchant 3 | 5D161A26-91A4-4784-8DEF-FAF0A3F9E8B7 |
+| Test Merchant 1 | A9B05E16-ACD8-4ACF-8E29-951E0D39DA9A |
+| Test Merchant 2 | B3E7C684-99A2-4253-898B-01515B92F1B1 |
+| Test Merchant 3 | E7039E52-410B-4A4A-8516-B15D64880734 |
 
 #### Responses
 

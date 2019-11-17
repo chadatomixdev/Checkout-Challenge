@@ -1,10 +1,9 @@
 ﻿using Checkout.Data.Model;
 using Checkout.Shared.Interfaces;
-using Checkout.UnitTests.Fakes;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Checkout.UnitTests
+namespace Checkout.UnitTests.Fakes
 {
     public class CurrencyServiceFake : BaseFake, ICurrencyService
     {

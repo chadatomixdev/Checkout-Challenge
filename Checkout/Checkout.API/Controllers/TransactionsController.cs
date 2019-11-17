@@ -77,7 +77,7 @@ namespace Checkout.API.Controllers
             bank = _bankService.GetBankByName(transactionRepresenter.Bank);
 
             if (bank is null)
-                return BadRequest("Currency not supported");
+                return BadRequest("Bank not supported");
 
             #endregion
 
@@ -114,13 +114,15 @@ namespace Checkout.API.Controllers
                 Merchant = merchant,
                 MerchantID = merchant.MerchantID,
                 Status = TransactionStatus.Created.ToString(),
-                TransactionID = Guid.NewGuid()
+                TransactionID = Guid.NewGuid(),
+                Bank = bank,
+                BankID = bank.BankID
             };
 
             _transactionService.CreateTransaction(transactionEntity);
 
             //Process transaction through mock acquirer
-            var bankResponse =  await APIHelper.ProcessTransactionAsync(transactionRepresenter);
+            var bankResponse =  await APIHelper.ProcessTransactionAsync(transactionRepresenter, bank.BankURL);
             var bankResponseData = bankResponse.Content.ReadAsStringAsync().Result;
 
            var json = JsonConvert.DeserializeObject<BankResponse>(bankResponseData);
@@ -185,7 +187,18 @@ namespace Checkout.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(_transactionService.GetTransactionsByMerchantID(merchantID));
+            var merchant = new Merchant();
+            merchant = _merchantService.GetMerchant(merchantID);
+
+            if (merchant is null)
+                return BadRequest("Merchant is invalid");
+
+            var transactions = _transactionService.GetTransactionsByMerchantID(merchantID);
+
+            if (transactions.Count == 0)
+                return NotFound();
+
+            return Ok(transactions);
         }
     }
 }

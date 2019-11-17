@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"currency\": \"ZAR\",\r\n  \"amount\": 200,\r\n  \"card\": {\r\n    \"cardNumber\": \"4242 4242 4242 4242\",\r\n    \"cvv\": \"100\",\r\n    \"holderName\": \"CHADTBONTHUYS\",\r\n    \"expiryMonth\": \"11\",\r\n    \"expiryYear\": \"19\"\r\n  },\r\n  \"merchantID\": \"1D620903-D485-4421-958F-8265C0B41844\"\r\n}"
+							"raw": "{\r\n  \"currency\": \"ZAR\",\r\n  \"amount\": 200,\r\n  \"card\": {\r\n    \"cardNumber\": \"4242 4242 4242 4242\",\r\n    \"cvv\": \"100\",\r\n    \"holderName\": \"CHADTBONTHUYS\",\r\n    \"expiryMonth\": \"11\",\r\n    \"expiryYear\": \"19\"\r\n  },\r\n  \"merchantID\": \"A9B05E16-ACD8-4ACF-8E29-951E0D39DA9A\",\r\n  \"bank\" : \"MockBank\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:50215/Transactions/process",
@@ -84,13 +84,13 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json\"",
-								"type": "text"
+								"type": "text",
+								"value": "application/json\""
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"currency\": \"ZAR\",\r\n  \"amount\": 200,\r\n  \"card\": {\r\n    \"cardNumber\": \"4242 4242 4242 4242\",\r\n    \"cvv\": \"100\",\r\n    \"holderName\": \"CHADTBONTHUYS\",\r\n    \"expiryMonth\": \"11\",\r\n    \"expiryYear\": \"19\"\r\n  },\r\n  \"merchantID\": \"1D620903-D485-4421-958F-8265C0B41844\"\r\n}"
+							"raw": "{\r\n  \"currency\": \"ZAR\",\r\n  \"amount\": 200,\r\n  \"card\": {\r\n    \"cardNumber\": \"4242 4242 4242 4242\",\r\n    \"cvv\": \"100\",\r\n    \"holderName\": \"CHADTBONTHUYS\",\r\n    \"expiryMonth\": \"11\",\r\n    \"expiryYear\": \"19\"\r\n  },\r\n  \"merchantID\": \"A9B05E16-ACD8-4ACF-8E29-951E0D39DA9A\",\r\n  \"bank\" : \"MockBank\"\r\n}"
 						},
 						"url": {
 							"raw": "https://checkoutchallengeapi.azurewebsites.net/Transactions/process",

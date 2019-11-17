@@ -8,15 +8,6 @@ namespace Checkout.API.Helpers
 {
     public static class WebRequestHelper
     {
-
-#if DEBUG
-        public static string BaseUrl => "http://localhost:62268/";
-#endif
-
-#if RELEASE
-        public static string BaseUrl => "https://checkoutmockbank.azurewebsites.net/";
-#endif
-
         public static async Task<HttpResponseMessage> MakeAsyncRequest(string url, Dictionary<string, string> content)
         {
             var httpClient = new HttpClient

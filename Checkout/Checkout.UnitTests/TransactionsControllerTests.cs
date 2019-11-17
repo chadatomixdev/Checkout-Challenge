@@ -1,6 +1,7 @@
 ﻿using Checkout.API.Controllers;
 using Checkout.Data.Model;
 using Checkout.Shared.Interfaces;
+using Checkout.UnitTests.Fakes;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -10,22 +11,38 @@ using Xunit;
 
 namespace Checkout.UnitTests
 {
-    public class TransactionsWebAPITest
+    public class TransactionsControllerTests
     {
         ICurrencyService _currencyService;
         ICardDetailsService _cardDetailsService;
         IMerchantService _merchantsService;
         ITransactionService _transactionsService;
+        IBankService _bankService;
+
         TransactionsController _transactionsController;
 
-        public TransactionsWebAPITest()
+        public TransactionsControllerTests()
         {
             _currencyService = new CurrencyServiceFake();
             _merchantsService = new MerchantServiceFake();
             _transactionsService = new TransactionServiceFake();
             _cardDetailsService = new CardDetailsServiceFake();
-            _transactionsController = new TransactionsController(_currencyService, _cardDetailsService, _merchantsService, _transactionsService);
+            _bankService = new BankServiceFake();
+            _transactionsController = new TransactionsController(_currencyService, _cardDetailsService, _merchantsService, _transactionsService, _bankService);
         }
+
+        #region ProcessTransaction Tests
+
+
+
+        #endregion
+
+
+        #region GetTransactionByTransactionID Tests
+
+        #endregion
+
+
 
         #region GetTransactionsByMerchantID Tests
 
@@ -54,6 +71,19 @@ namespace Checkout.UnitTests
             // Assert
             var items = Assert.IsType<List<Transaction>>(okResult.Value);
             Assert.Equal(2, items.Count);
+        }
+
+        [Fact]
+        public void GetTransactionByMerchantID_UnknownGuidPassed_ReturnsNotFoundResult()
+        {
+            //Arrange
+            var merchantID = Guid.NewGuid();
+
+            // Act
+            var badRequestResult = _transactionsController.GetTransactionsByMerchantID(merchantID);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(badRequestResult);
         }
 
         #endregion
