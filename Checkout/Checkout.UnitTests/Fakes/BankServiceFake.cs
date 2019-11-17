@@ -1,6 +1,7 @@
 ﻿using Checkout.Data.Model;
 using Checkout.Shared.Interfaces;
 using Checkout.Shared.Representers;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,15 @@ namespace Checkout.UnitTests.Fakes
 
         public Task<TransactionCreationRepresenter> ProcessTransaction(TransactionRepresenter transactionRepresenter, string bankURL)
         {
-            throw new System.NotImplementedException();
+            var TransactionCreationRepresenter = new TransactionCreationRepresenter
+            {
+                BankResponseID = Guid.NewGuid(),
+                Status = "Successful",
+                SubStatus = "Succesfull"
+            };
+
+            var t = Task.FromResult(TransactionCreationRepresenter);
+            return t;
         }
     }
 }

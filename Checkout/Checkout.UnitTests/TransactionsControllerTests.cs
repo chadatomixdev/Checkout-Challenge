@@ -41,10 +41,10 @@ namespace Checkout.UnitTests
             var _transaction = new TransactionRepresenter { Amount = 200, Currency = "GBP", Bank = "MockBank", Card = card, MerchantID = "1D620903-D485-4421-958F-8265C0B41844" };
 
             // Act
-            var createdResponse = _transactionsController.ProcessTransaction(_transaction);
+            var createdResponse = _transactionsController.ProcessTransaction(_transaction).Result;
 
             // Assert
-            Assert.IsType<CreatedAtActionResult>(createdResponse);
+            Assert.IsType<OkObjectResult>(createdResponse);
         }
 
         #endregion
