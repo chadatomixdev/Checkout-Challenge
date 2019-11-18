@@ -5,7 +5,6 @@ using Checkout.Shared.Interfaces;
 using Checkout.Shared.Models;
 using Checkout.Shared.Representers;
 using Newtonsoft.Json;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,6 +29,12 @@ namespace Checkout.Shared.Services
             return _contextService.Find<Bank>(b => b.BankName == bank).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Process a tranction through an acquirer
+        /// </summary>
+        /// <param name="transactionRepresenter"></param>
+        /// <param name="bankURL"></param>
+        /// <returns></returns>
         public async Task<TransactionCreationRepresenter> ProcessTransaction(TransactionRepresenter transactionRepresenter, string bankURL)
         {
             //Process transaction through acquirer

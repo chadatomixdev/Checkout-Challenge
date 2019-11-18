@@ -27,7 +27,7 @@ namespace Checkout.MockBank
         /// Called by the runtime to Add System Services to the container
         /// </summary>
         /// <param name="services"></param>
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
         }
@@ -37,7 +37,7 @@ namespace Checkout.MockBank
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

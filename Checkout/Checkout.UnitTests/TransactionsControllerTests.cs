@@ -47,6 +47,75 @@ namespace Checkout.UnitTests
             Assert.IsType<OkObjectResult>(createdResponse);
         }
 
+        [Fact]
+        public void PostTransactionValidObjectPassedReturnsTransactionResponse()
+        {
+            var card = new CardDetails { CardNumber = "4242 4242 4242 4242", Cvv = "100", HolderName = "CHADTBONTHUYS", ExpiryMonth = "11", ExpiryYear = "19" };
+            var _transaction = new TransactionRepresenter { Amount = 200, Currency = "GBP", Bank = "MockBank", Card = card, MerchantID = "1D620903-D485-4421-958F-8265C0B41844" };
+
+            // Act
+            var createdResponse = _transactionsController.ProcessTransaction(_transaction).Result as OkObjectResult;
+
+            // Assert
+            Assert.IsType<TransactionCreationRepresenter>(createdResponse.Value);
+        }
+
+        [Fact]
+        public void PostTransactionInvalidCurrencyReturnsBadRequest()
+        {
+            // Arrange
+            var card = new CardDetails { CardNumber = "4242 4242 4242 4242", Cvv = "100", HolderName = "CHADTBONTHUYS", ExpiryMonth = "11", ExpiryYear = "19" };
+            var _transaction = new TransactionRepresenter { Amount = 200, Currency = "AAA", Bank = "MockBank", Card = card, MerchantID = "1D620903-D485-4421-958F-8265C0B41844" };
+
+            // Act
+            var createdResponse = _transactionsController.ProcessTransaction(_transaction).Result;
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(createdResponse);
+        }
+
+        [Fact]
+        public void PostTransactionInvalidBankReturnsBadRequest()
+        {
+            // Arrange
+            var card = new CardDetails { CardNumber = "4242 4242 4242 4242", Cvv = "100", HolderName = "CHADTBONTHUYS", ExpiryMonth = "11", ExpiryYear = "19" };
+            var _transaction = new TransactionRepresenter { Amount = 200, Currency = "GBP", Bank = "InvalidBank", Card = card, MerchantID = "1D620903-D485-4421-958F-8265C0B41844" };
+
+            // Act
+            var createdResponse = _transactionsController.ProcessTransaction(_transaction).Result;
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(createdResponse);
+        }
+
+        [Fact]
+        public void PostTransactionInvalidMerchantReturnsBadRequest()
+        {
+            // Arrange
+            var card = new CardDetails { CardNumber = "4242 4242 4242 4242", Cvv = "100", HolderName = "CHADTBONTHUYS", ExpiryMonth = "11", ExpiryYear = "19" };
+            var _transaction = new TransactionRepresenter { Amount = 200, Currency = "GBP", Bank = "MockBank", Card = card, MerchantID = "badGUID" };
+
+            // Act
+            var createdResponse = _transactionsController.ProcessTransaction(_transaction).Result;
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(createdResponse);
+        }
+
+        [Fact]
+        public void PostTransactionInvaliAmountBadRequest()
+        {
+            // Arrange
+            var card = new CardDetails { CardNumber = "4242 4242 4242 4242", Cvv = "100", HolderName = "CHADTBONTHUYS", ExpiryMonth = "11", ExpiryYear = "19" };
+            var _transaction = new TransactionRepresenter { Amount = 0, Currency = "GBP", Bank = "MockBank", Card = card, MerchantID = "1D620903-D485-4421-958F-8265C0B41844" };
+
+            // Act
+            var createdResponse = _transactionsController.ProcessTransaction(_transaction).Result;
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(createdResponse);
+        }
+
         #endregion
 
         #region GetTransactionByTransactionID Tests
@@ -111,7 +180,7 @@ namespace Checkout.UnitTests
         }
 
         [Fact]
-        public void GetTransactionByMerchantID_UnknownGuidPassed_ReturnsNotFoundResult()
+        public void GetTransactionByMerchantIDUnknownGuidPassedReturnsBadRequest()
         {
             //Arrange
             var merchantID = Guid.NewGuid();
